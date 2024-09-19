@@ -1,0 +1,64 @@
+---
+import Navbar from "../components/Navbar.svelte";
+interface Props {
+    title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="description" content="Astro description" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/png" href="/favicon.png" />
+        <meta name="generator" content={Astro.generator} />
+        <title>{title}</title>
+    </head>
+    <body>
+        <Navbar />
+        <slot />
+    </body>
+</html>
+
+<style is:global>
+    @font-face {
+        font-family: "Space-Grotesk";
+        src:
+            url("/fonts/SpaceGrotesk-Variable.woff2") format("woff2"),
+            url("/fonts/SpaceGrotesk-Variable.woff") format("woff");
+        font-weight: 300 700;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: "Poppins";
+        src:
+            url("/fonts/Poppins-Bold.woff2") format("woff2"),
+            url("/fonts/Poppins-Bold.woff") format("woff");
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    :root {
+    }
+
+    html {
+        font-family: Space-Grotesk, Tahoma, sans-serif;
+    }
+
+    body {
+        background-color: #f0f5f0;
+        padding: 0;
+        margin: 0;
+    }
+
+    button {
+        border: none;
+        outline: none;
+    }
+</style>
