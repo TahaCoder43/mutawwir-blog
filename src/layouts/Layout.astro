@@ -1,5 +1,6 @@
 ---
 import Navbar from "../components/Navbar.svelte";
+import GradientLink from "../components/GradientLink.svelte";
 interface Props {
     title: string;
 }
@@ -18,13 +19,18 @@ const { title } = Astro.props;
         <title>{title}</title>
     </head>
     <body>
-        <Navbar />
+        <Navbar client:load>
+            <GradientLink client:load href="/">Home</GradientLink>
+            <GradientLink client:load href="/blog/">Blog</GradientLink>
+            <GradientLink client:load href="<about-me">About me</GradientLink>
+            <GradientLink client:load href="/contact/">Contact me</GradientLink>
+        </Navbar>
         <slot />
     </body>
 </html>
 
 <style is:global>
-    @font-face {
+    /*@font-face {
         font-family: "Space-Grotesk";
         src:
             url("/fonts/SpaceGrotesk-Variable.woff2") format("woff2"),
@@ -32,6 +38,41 @@ const { title } = Astro.props;
         font-weight: 300 700;
         font-style: normal;
         font-display: swap;
+    }*/
+
+    @font-face {
+        font-family: "Space-Grotesk";
+        src: url("/fonts/SpaceGrotesk-Light.ttf") format("Opentype");
+        font-weight: 300;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: "Space-Grotesk";
+        src: url("/fonts/SpaceGrotesk-Regular.ttf") format("Opentype");
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: "Space-Grotesk";
+        src: url("/fonts/SpaceGrotesk-Medium.ttf") format("Opentype");
+        font-weight: 500;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: "Space-Grotesk";
+        src: url("/fonts/SpaceGrotesk-SemiBold.ttf") format("Opentype");
+        font-weight: 600;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: "Space-Grotesk";
+        src: url("/fonts/SpaceGrotesk-Bold.ttf") format("Opentype");
+        font-weight: 700;
+        font-style: normal;
     }
 
     @font-face {
@@ -45,6 +86,13 @@ const { title } = Astro.props;
     }
 
     :root {
+        --navbar-height: 4.5rem;
+        --color-background: #f0f0f0;
+        --hero-high-contrast: #eee;
+        --hero-medium-contrast: #ccc;
+        --hero-low-contrast: #bbb;
+        --hero-verylow-contrast: #777;
+        --accent-color: hsl(270, 80%, 60%);
     }
 
     html {
@@ -52,13 +100,53 @@ const { title } = Astro.props;
     }
 
     body {
-        background-color: #f0f5f0;
+        background-color: var(--color-background);
         padding: 0;
         margin: 0;
+        overflow-x: hidden;
+        height: 200vh;
     }
 
     button {
         border: none;
         outline: none;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    *[data-title] {
+        position: relative;
+    }
+
+    *[data-title]:hover::after {
+        opacity: 1;
+        visibility: visible;
+        transition:
+            opacity 0.3s,
+            visibility 0s;
+    }
+
+    *[data-title]::after {
+        content: attr(data-title);
+        font-family: Space-Grotesk, sans-serif;
+        padding-inline: 5px;
+        padding-block: 3px;
+        font-size: 1rem;
+        position: absolute;
+        top: calc(100% + 10px);
+        left: -50%;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 99999999;
+        white-space: nowrap;
+        transition:
+            opacity 0.3s,
+            visibility 0s 0.3s;
+        background-color: #caf;
+        color: #111;
+        border-radius: 5px;
+        box-shadow: 2px 3px 5px 1px #0004;
     }
 </style>
