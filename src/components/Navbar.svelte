@@ -11,7 +11,6 @@
             let scrollTop = document.documentElement.scrollTop
             let scrolledDown = scrollTop > priorScrollTop
             let scrolledUp = scrollTop < priorScrollTop
-            console.log(scrolledDown, scrolledUp)
 
             if (scrolledDown) {
                 visibility = "hidden"
