@@ -2,7 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.svelte";
 import Background from "../components/Background.svelte";
-import BlogsInfo from "../components/BlogsInfo.astro";
+import BlogsInfo from "../components/BlogsInfo.svelte";
 ---
 
 <Layout title="The Mutawwir blog">
@@ -11,7 +11,7 @@ import BlogsInfo from "../components/BlogsInfo.astro";
         <Background client:load />
     </div>
     <div id="sticky-limit-blogs-info">
-        <BlogsInfo />
+        <BlogsInfo client:load />
     </div>
 </Layout>
 

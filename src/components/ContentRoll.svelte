@@ -1,73 +1,25 @@
 <script lang="ts">
-import { onMount } from "svelte";
+let thisContentRoll: HTMLElement;
+export let currentPresentationIndex: number; 
 
-const scrollEffectLimit = 1500; // modify css variable in Layout.astro too
-let scrolledPerc: number;
-let selfRef: HTMLElement;
-let parentTop: number;
+$: updateCurrentSection(currentPresentationIndex, thisContentRoll)
 
-function setParentTopOnFirstVisit() {
-    if (selfRef.parentElement === null) {
-        throw new NoParentError("ContentRoll Should have parentElement")
-    }
-
-    if (selfRef.parentElement.parentElement === null) {
-        throw new NoParentError("ContentRoll Should have parentElement")
-    }
-
-    let parentTopString = localStorage.getItem("blogsInfoTop")
-    if (parentTopString === null) {
-        parentTop = selfRef.parentElement.parentElement.offsetTop
-        localStorage.setItem("blogsInfoTop", parentTop.toString())
+function updateCurrentSection(currentPresentationIndex: number, thisContentRoll: HTMLElement) {
+    try {
+        const scrollPx = window.innerHeight * currentPresentationIndex
+        thisContentRoll.scrollTo(0, scrollPx)
+    } catch(err) {
+        if (!(err instanceof ReferenceError || err instanceof TypeError)) {
+            throw err
+        }
+        console.log("ReferenceError or TypeError, not important")
         return
-    }
-
-    parentTop = parseInt(parentTopString);
-
-}
-
-class NoParentError extends Error {
-    constructor(msg: string) {
-        super(msg)
-        
-        Object.setPrototypeOf(this, NoParentError.prototype)
     }
 }
 
-function updateScrollPerc() {
-
-    const scrollTop = document.documentElement.scrollTop;
-    const scrolled = scrollTop - parentTop
-    const excededScrollEffectLimit = (scrolled > scrollEffectLimit)
-    const notReachedScrollEffectArea = (scrolled < 0)
-
-    console.log("scrolled", scrolled)
-
-    if (excededScrollEffectLimit) {
-        scrolledPerc = 1 
-        return
-    } else if (notReachedScrollEffectArea) {
-        scrolledPerc = 0
-        return
-    }
-
-    scrolledPerc = scrolled / scrollEffectLimit
-    const currentChildIndex = Math.floor(scrolledPerc * 5)
-    const scrollPx = window.innerHeight * currentChildIndex
-    selfRef.scrollTo(0, scrollPx)
-
-
-}
-
-
-onMount(() => {
-    setParentTopOnFirstVisit()
-    updateScrollPerc()
-    document.addEventListener("scroll", updateScrollPerc)
-})
 </script>
 
-<section id="content-roll" bind:this={selfRef}>
+<section id="content-roll" bind:this={thisContentRoll}>
         <section>
             <h2>Introduction</h2>
             <p>

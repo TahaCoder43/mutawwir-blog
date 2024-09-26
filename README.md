@@ -1,10 +1,14 @@
 
 # Introduction
-
 The Mutawwir blog, dedicated to coding, linux, dev tools, CLI tools, TUI, softwares, programming languages, frameworks, build tools, web development, IDEs and much more
 
-# TODO
+# Today TODO
+transitions colors of lines connected to text upon scroll
 
+also when scrolling to end, blogsinfo bugs up, and scrolleffects don't work anymore
+
+
+# TODO
 - [x] [Hero background](#Background)
 - [] [In-page Navbar](#In-page Navbar)
 - [] [image-text arc](#Arc)
