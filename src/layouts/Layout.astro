@@ -87,16 +87,25 @@ const { title } = Astro.props;
 
     :root {
         --navbar-height: 4.5rem;
+
+        --background-video-stick-limit: 600px;
+        --blogs-info-stick-limit: 1500px;
+
+        --paragraph-font: Space-Grotesk, Tahoma, sans-serif;
+        --heading-font: Poppins, Tahoma, sans-serif;
+
         --color-background: #f0f0f0;
         --hero-high-contrast: #eee;
         --hero-medium-contrast: #ccc;
         --hero-low-contrast: #bbb;
         --hero-verylow-contrast: #777;
+        --high-contrast: #222;
+        --medium-contrast: #555;
         --accent-color: hsl(270, 80%, 60%);
     }
 
     html {
-        font-family: Space-Grotesk, Tahoma, sans-serif;
+        font-family: var(--paragraph-font);
     }
 
     body {
@@ -104,7 +113,7 @@ const { title } = Astro.props;
         padding: 0;
         margin: 0;
         overflow-x: hidden;
-        height: 300vh;
+        height: 500vh;
     }
 
     button {

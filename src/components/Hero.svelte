@@ -1,6 +1,6 @@
 
-<div id="hero">
-    <section id="content">
+<section id="hero">
+    <div id="content">
         <h1>
             <div id="darken"></div>
             The <span class="highlight">Mutawwir</span> Blog
@@ -13,8 +13,8 @@
             <a href="/blog/" data-title="Go to blog page">Read!</a>
             <a href="/about-me/" data-title="Go to about-me page">About me!</a>
         </div>
-    </section>
-</div>
+    </div>
+</section>
 
 <style lang="scss">
     #hero {
@@ -40,9 +40,10 @@
                 margin-top: 80px;
                 margin-bottom: 20px;
 
-                font-family: Poppins, Tahoma, sans-serif;
+                font-family: var(--heading-font);
                 font-size: 4rem;
                 color: var(--hero-high-contrast);
+                text-transform: uppercase;
 
                 span.highlight {
                     color: var(--accent-color);

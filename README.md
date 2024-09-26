@@ -5,7 +5,7 @@ The Mutawwir blog, dedicated to coding, linux, dev tools, CLI tools, TUI, softwa
 
 # TODO
 
-- [] [Hero background](#Background)
+- [x] [Hero background](#Background)
 - [] [In-page Navbar](#In-page Navbar)
 - [] [image-text arc](#Arc)
 - [] [Seemless seperators section](#Seemless lines) 
@@ -26,6 +26,6 @@ This section should link to blog page at various places, with each place represe
 # Seemless lines
 add a seemless section with lines as seperators, each with heading, text and simple illustrative picture to tell what it's about
 
-This section to lead to my neural nexus institute, work, and usage of various linux related info
+This section to lead to my freelancing, neural nexus institute , and usage of various linux related info
 
 make an illustration for the seamless section above that represents a laptop with window manager, with island style topbar, and tilling WM look. This should be for linux related info

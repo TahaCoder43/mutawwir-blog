@@ -5,12 +5,9 @@ import { onMount } from "svelte";
 const scrollEffectLimit = 450;
 let scrolledPerc: number;
 $: scrolledPercVar = `--scrolled-perc: ${scrolledPerc}`
-$: console.log("perc", scrolledPerc)
-$: console.log("var", scrolledPercVar)
 
 function updateScrollPerc() {
     const scrollTop = document.documentElement.scrollTop;
-    console.log(scrollTop)
     const excededScrollEffectLimit = (scrollTop > scrollEffectLimit)
     if (excededScrollEffectLimit) {
         scrolledPerc = 1 

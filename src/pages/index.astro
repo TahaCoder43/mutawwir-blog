@@ -2,25 +2,33 @@
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.svelte";
 import Background from "../components/Background.svelte";
+import BlogsInfo from "../components/BlogsInfo.astro";
 ---
 
 <Layout title="The Mutawwir blog">
     <Hero client:load />
-    <div id="sticky-limit">
+    <div id="sticky-limit-video-background">
         <Background client:load />
     </div>
-
-    <style lang="scss"></style>
+    <div id="sticky-limit-blogs-info">
+        <BlogsInfo />
+    </div>
 </Layout>
 
 <style lang="scss">
-    #sticky-limit {
+    #sticky-limit-video-background {
         position: absolute;
         left: 0;
         top: 0;
         z-index: -2;
 
-        height: calc(100% + 600px);
+        height: calc(100vh + var(--background-video-stick-limit));
         width: 100%;
+    }
+
+    #sticky-limit-blogs-info {
+        height: calc(100vh + var(--blogs-info-stick-limit));
+        width: 100%;
+        margin-top: calc(var(--background-video-stick-limit) + 30px);
     }
 </style>
