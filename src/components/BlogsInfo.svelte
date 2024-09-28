@@ -1,6 +1,9 @@
 <script lang="ts">
-import ContentRoll from "./ContentRoll.svelte";
+import Roll from "./Roll.svelte"
 import Arc from "./Arc.svelte"
+import ContentRollButton from "./ContentRollButton.svelte"
+import Coding from "./Coding.svelte"
+import Linux from "./Linux.svelte"
 import { onMount } from "svelte";
 
 const scrollEffectLimit = 1500; // modify css variable in Layout.astro too
@@ -17,7 +20,7 @@ class NoParentError extends Error {
     }
 }
 
-function updateScrollPerc() {
+function updateCurrentPresentationIndex() {
 
     const scrollTop = document.documentElement.scrollTop;
     const scrolled = scrollTop - stickyLimitTop
@@ -25,14 +28,14 @@ function updateScrollPerc() {
     const notReachedScrollEffectArea = (scrolled < 0)
 
     if (excededScrollEffectLimit) {
-        scrolledPerc = 1 
+        scrolledPerc = 0.99
     } else if (notReachedScrollEffectArea) {
         scrolledPerc = 0
     } else {
-        scrolledPerc = scrolled / scrollEffectLimit
+        scrolledPerc = scrolled / (scrollEffectLimit+1)
     }
 
-    currentPresentationIndex = Math.floor(scrolledPerc * 5)
+    currentPresentationIndex = Math.floor(scrolledPerc * 5.0)
 }
 
 
@@ -48,8 +51,8 @@ onMount(() => {
     }
 
     stickyLimitTop = stickyLimit.offsetTop
-    updateScrollPerc()
-    document.addEventListener("scroll", updateScrollPerc)
+    updateCurrentPresentationIndex()
+    document.addEventListener("scroll", updateCurrentPresentationIndex)
 })
 
 </script>
@@ -57,22 +60,133 @@ onMount(() => {
 <section id="blogs-info" bind:this={thisBlogsInfo}>
     <div class={["fade", "top"].join(" ")}></div>
     <div class={["fade", "bottom"].join(" ")}></div>
-    <ContentRoll {currentPresentationIndex} />
+    <Roll {currentPresentationIndex} >
+        <section>
+            <h2>Introduction</h2>
+            <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus non atque esse iure nisi adipisci
+                quod quasi explicabo vero quibusdam, harum beatae iste alias, aliquam ullam laborum praesentium!
+                Excepturi, officia. Include here what mutawwir means in arabic, and what hte blog is about
+            </p>
+            <ContentRollButton> Read </ContentRollButton>
+        </section>
+        <section>
+            <h2>Coding</h2>
+            <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus non atque esse iure nisi adipisci
+                quod quasi explicabo vero quibusdam, harum beatae iste alias, aliquam ullam laborum praesentium!
+                Excepturi, officia.
+            </p>
+            <ContentRollButton>Read</ContentRollButton>
+        </section>
+        <section>
+            <h2>Linux</h2>
+            <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus non atque esse iure nisi adipisci
+                quod quasi explicabo vero quibusdam, harum beatae iste alias, aliquam ullam laborum praesentium!
+                Excepturi, officia.
+            </p>
+            <ContentRollButton>Read</ContentRollButton>
+        </section>
+        <section>
+            <h2>Dev-tools</h2>
+            <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus non atque esse iure nisi adipisci
+                quod quasi explicabo vero quibusdam, harum beatae iste alias, aliquam ullam laborum praesentium!
+                Excepturi, officia.
+            </p>
+            <ContentRollButton>Read</ContentRollButton>
+        </section>
+        <section>
+            <h2>IDE & Code-Editors</h2>
+            <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus non atque esse iure nisi adipisci
+                quod quasi explicabo vero quibusdam, harum beatae iste alias, aliquam ullam laborum praesentium!
+                Excepturi, officia.
+            </p>
+            <ContentRollButton>Read</ContentRollButton>
+        </section>
+    </Roll>
     <Arc {currentPresentationIndex} />
-    <section id="image-roll"></section>
+    <div class="spacing"/>
+    <Roll {currentPresentationIndex}>
+        <div class="image-container">
+            <img src="/arc/introduction.svg" alt="Computer screen with blog posts"/>
+        </div>
+        <div class="image-container">
+            <Coding/>
+        </div>
+        <div class="image-container">
+            <Linux/>
+        </div>
+        <div class="image-container">
+            <img src="/arc/introduction.svg" alt="Computer screen with blog posts"/>
+        </div>
+        <div class="image-container">
+            <img src="/arc/introduction.svg" alt="Computer screen with blog posts"/>
+        </div>
+    </Roll>
 </section>
 
 <style lang="scss">
     #blogs-info {
+
         position: sticky;
         top: 0;
         height: 100vh;
         display: flex;
+        background-image: radial-gradient(circle at 15% 60%, hsla(270, 80%, 60%, 0.45), transparent 400px),
+            radial-gradient(circle at 35% 40%, hsla(200, 80%, 60%, 0.4), transparent 400px),
+            radial-gradient(circle at 35% 40%, hsla(200, 80%, 60%, 0.4), transparent 400px),
+            ;
 
-        #image-roll {
-            background-color: #ffc;
-            width: 100%;
+        .spacing {
             flex-shrink: 2;
+            width: 100%
+        }
+
+        :global(> section:nth-last-child(1)) {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 350px;
+            height: 100%;
+            background-color: transparent;
+        }
+
+        section {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+
+            padding-inline: 50px 20px;
+
+            h2 {
+                font-size: 5.5rem;
+                font-family: var(--heading-font);
+                font-weight: 700;
+                text-transform: uppercase;
+                color: var(--high-contrast);
+                letter-spacing: -2px;
+                line-height: 1.3em;
+
+                margin-block: 0 
+            }
+
+            p {
+                font-size: 1.5rem;
+                color: var(--medium-contrast);
+            }
+        }
+
+        .image-container {
+            display: flex;
+            align-items: center;
+            overflow: visible;
+
+            img {
+                height: 50%;
+            }
         }
 
         .fade {

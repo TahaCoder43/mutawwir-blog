@@ -2,6 +2,7 @@
 
 export let currentPresentationIndex: number;
 let thisArcGradient: SVGLinearGradientElement;
+let thisLinks: SVGElement;
 let priorPresentatoinIndex: number = 0;
 let textContrasts = new Array(5).map((_) => "")
 const allArcOffsets = [
@@ -18,12 +19,11 @@ $: updateArc(currentPresentationIndex)
 $: console.log(priorPresentatoinIndex, currentPresentationIndex, priorArcOffsets, currentArcOffsets)
 
 function updateArc(currentPresentationIndex: number) {
-    textContrasts[currentPresentationIndex] = "highlight"
     textContrasts[priorPresentatoinIndex] = ""
+    textContrasts[currentPresentationIndex] = "highlight"
 
     priorArcOffsets = allArcOffsets[priorPresentatoinIndex]
     currentArcOffsets = allArcOffsets[currentPresentationIndex]
-
     if (thisArcGradient !== undefined) {
         Array.from(thisArcGradient.children).map(stop => stop.firstChild).forEach(animate => {
             if (!(animate instanceof SVGAnimateElement)) {
@@ -33,8 +33,17 @@ function updateArc(currentPresentationIndex: number) {
         })
     }
 
-    priorPresentatoinIndex = currentPresentationIndex
+    if (thisLinks !== undefined) {
+        let currentLink = thisLinks.querySelector(`path:nth-child(${currentPresentationIndex+1})`)
+        let priorLink = thisLinks.querySelector(`path:nth-child(${priorPresentatoinIndex+1})`)
+        if (currentLink === null || priorLink === null) {
+            throw TypeError(`currentLink:${currentLink} or priorLink:${priorLink} should not be null`)
+        }
+        currentLink.classList.add("highlight")
+        priorLink.classList.remove("highlight")
+    }
 
+    priorPresentatoinIndex = currentPresentationIndex
 }
 
 </script>
@@ -62,16 +71,20 @@ function updateArc(currentPresentationIndex: number) {
         <!-- <stop offset="0%" stop-color="hsl(270, 80%, 60%)"/> -->
         <!-- <stop offset="100%" stop-color="hsl(230, 80%, 60%)"/> -->
     </linearGradient>
+    <linearGradient id="highlightLinkGradient">
+        <stop offset="0%" stop-color="hsl(270, 100%, 80%)" />
+        <stop offset="100%" stop-color="hsl(270, 80%, 50%)" />
+    </linearGradient>
   </defs>
   <g id="layer1" transform="translate(-696.33604,18.800112)">
     <g id="g4" style="stroke:#131313;stroke-opacity:1">
       <path id="arc" d="M 1094.7716,-18.050112 C 845.65181,68.908134 746.33144,647.7215 1082.8031,753.83697" />
-      <g id="g1" style="stroke:#131313;stroke-width:1;stroke-dasharray:none;stroke-opacity:1">
-        <path style="fill:none;stroke:#131313;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker5)" d="M 906.82498,152.61953 854.4767,108.24573" id="path2" />
-        <path style="fill:none;stroke:#131313;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker5)" d="M 870.95339,261.08041 804.49312,234.86126" id="path2-5" />
-        <path style="fill:none;stroke:#131313;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker5)" d="m 847.99276,380.59415 -71.65322,-0.37274" id="path2-0" />
-        <path style="fill:none;stroke:#131313;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker5)" d="m 858.59285,504.97881 -67.79374,26.97025" id="path2-9" />
-        <path style="fill:none;stroke:#131313;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker5)" d="M 890.56799,612.72703 834.31928,662.0913" id="path2-9-8" />
+      <g id="g1" style="stroke:#131313;stroke-width:1;stroke-dasharray:none;stroke-opacity:1" bind:this={thisLinks}>
+        <path class="link" d="M 906.82498,152.61953 854.4767,108.24573" id="path2" />
+        <path class="link" d="M 870.95339,261.08041 804.49312,234.86126" id="path2-5" />
+        <path class="link" d="m 847.99276,380.59415 -71.65322,-0.37274" id="path2-0" />
+        <path class="link" d="m 858.59285,504.97881 -67.79374,26.97025" id="path2-9" />
+        <path class="link" d="M 890.56799,612.72703 834.31928,662.0913" id="path2-9-8" />
       </g>
       <g id="g3">
         <text xml:space="preserve" transform="matrix(0.25541301,0,0,0.25541301,-49.841603,13.95271)" id="text7" style="shape-inside:url(#rect7);" class={textContrasts[0]}>
@@ -102,14 +115,29 @@ function updateArc(currentPresentationIndex: number) {
         #arc {
             fill:none;
             stroke:url(#arcGradient);
-            /* stroke-width:1.5; */
-            /* stroke-dasharray:102, 4.5; */
-            /* stroke-dashoffset:8.25; */
-            stroke-width:5;
-            stroke-dasharray:102, 10;
-            stroke-dashoffset:8.25;
+            stroke-width: 5;
+            stroke-dasharray: 102, 10;
+            stroke-dashoffset: 8.25;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .link {
+            fill:none;
+            stroke:#131313;
+            stroke-width:1;
             stroke-linecap:round;
             stroke-linejoin:round;
+            stroke-dasharray:none;
+            stroke-opacity:1;
+            marker-end:url(#marker5);
+            transition: stroke 0.5s, stroke-width 0.5s, filter 0.5s;
+
+            &.highlight {
+                stroke: url(#highlightLinkGradient);
+                stroke-width: 2;
+                filter: drop-shadow(0px 0px 5px var(--accent-color));
+            }
         }
 
         text {

@@ -2,10 +2,19 @@
 # Introduction
 The Mutawwir blog, dedicated to coding, linux, dev tools, CLI tools, TUI, softwares, programming languages, frameworks, build tools, web development, IDEs and much more
 
-# Today TODO
-transitions colors of lines connected to text upon scroll
+# Vision
 
-also when scrolling to end, blogsinfo bugs up, and scrolleffects don't work anymore
+A blog that goes straight to practical. No here and there perhaps we should name it straight to code or straight way to  code (in arabic ofc) and add it in description
+
+so there would be no introduction, just say what your gonna do in the start of each blog and start doing it
+
+but there would be buttons and markers here and there, which would contain the "here and there" blog information like background (why I got here, why am I doig thi, frustrations of people e.t.cc). Maybe this will keep the SEO good too
+
+This blog should lead to my portfolio, so the about us page, will lead to another website which will be my portfolio
+
+# Today TODO
+
+Add 3d linux logos of alpine, KDE, Kali, Zorin OS, Fedora, NixOs to the linux section in the arc
 
 
 # TODO
@@ -13,6 +22,7 @@ also when scrolling to end, blogsinfo bugs up, and scrolleffects don't work anym
 - [] [In-page Navbar](#In-page Navbar)
 - [] [image-text arc](#Arc)
 - [] [Seemless seperators section](#Seemless lines) 
+- [] showcase section on home page, that shows all my cool projects I have undertaken. Or perhaps this should be in portfolio, or in both
 
 # Background
 thinking of making a slick video for backgroud, with black overlay on top, and give heading dark glow
@@ -26,6 +36,8 @@ A navbar sticking to the bottom, with glassmorphic style, with links linking to 
 make an arc section that sticks with an arc facing towards right, with scrolling-fading picture and text (paragraph, heading), inside and outside respectively. it should have lines connecting to topics, with a highlight radient gradient, on the line with current topic
 
 This section should link to blog page at various places, with each place representing the topic on the arc
+
+do good SEO
 
 # Seemless lines
 add a seemless section with lines as seperators, each with heading, text and simple illustrative picture to tell what it's about
