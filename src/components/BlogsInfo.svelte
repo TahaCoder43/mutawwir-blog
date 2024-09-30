@@ -1,7 +1,7 @@
 <script lang="ts">
 import Roll from "./arc/Roll.svelte"
 import Arc from "./arc/Arc.svelte"
-import ContentRollButton from "./arc/ContentRollButton.svelte"
+import BouncyButton from "./arc/BouncyButton.svelte"
 import Coding from "./arc/Coding.svelte"
 import ThreeStack from "./arc/ThreeStack.svelte";
 import { onMount } from "svelte";
@@ -68,7 +68,7 @@ onMount(() => {
                 quod quasi explicabo vero quibusdam, harum beatae iste alias, aliquam ullam laborum praesentium!
                 Excepturi, officia. Include here what mutawwir means in arabic, and what hte blog is about
             </p>
-            <ContentRollButton> Read </ContentRollButton>
+            <BouncyButton> Read </BouncyButton>
         </section>
         <section>
             <h2>Coding</h2>
@@ -77,7 +77,7 @@ onMount(() => {
                 quod quasi explicabo vero quibusdam, harum beatae iste alias, aliquam ullam laborum praesentium!
                 Excepturi, officia.
             </p>
-            <ContentRollButton>Read</ContentRollButton>
+            <BouncyButton>Read</BouncyButton>
         </section>
         <section>
             <h2>Linux</h2>
@@ -86,7 +86,7 @@ onMount(() => {
                 quod quasi explicabo vero quibusdam, harum beatae iste alias, aliquam ullam laborum praesentium!
                 Excepturi, officia.
             </p>
-            <ContentRollButton>Read</ContentRollButton>
+            <BouncyButton>Read</BouncyButton>
         </section>
         <section>
             <h2>Dev-tools</h2>
@@ -95,7 +95,7 @@ onMount(() => {
                 quod quasi explicabo vero quibusdam, harum beatae iste alias, aliquam ullam laborum praesentium!
                 Excepturi, officia.
             </p>
-            <ContentRollButton>Read</ContentRollButton>
+            <BouncyButton>Read</BouncyButton>
         </section>
         <section>
             <h2>IDE & Code-Editors</h2>
@@ -104,7 +104,7 @@ onMount(() => {
                 quod quasi explicabo vero quibusdam, harum beatae iste alias, aliquam ullam laborum praesentium!
                 Excepturi, officia.
             </p>
-            <ContentRollButton>Read</ContentRollButton>
+            <BouncyButton>Read</BouncyButton>
         </section>
     </Roll>
     <Arc {currentPresentationIndex} />

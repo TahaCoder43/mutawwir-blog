@@ -14,8 +14,15 @@ This blog should lead to my portfolio, so the about us page, will lead to anothe
 
 # Today TODO
 
-perhaps adding small skewX with large skewY like `skew(5deg, 15deg)` would make it look more realistic
-Add 3d linux logos of alpine, KDE, Kali, Zorin OS, Fedora, NixOs to the linux section in the arc
+improve the github area by changing the background, and added 3d looking paths, and a spheres and a cube maybe and more stuff
+
+add gradients on the backk of the background video for cool background gradients
+
+add staggering animation when seamles section becomes visible
+
+Decide the blog names, check your chat with chatgpt for it
+
+Now start writing paragraphs, and improve seo (do keyword research, better alts, better file names, better headings, more data-titles, better article dividers (sections footers e.t.c fix that, and use it properly with good seo))
 
 
 # TODO
@@ -44,3 +51,5 @@ do good SEO
 add a seemless section with lines as seperators, each with heading, text and simple illustrative picture to tell what it's about
 
 This section to lead to my freelancing, neural nexus institute , and github
+
+improve the github area by changing the background, and added 3d looking paths, and a spheres

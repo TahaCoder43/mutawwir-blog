@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.svelte";
 import Background from "../components/Background.svelte";
 import BlogsInfo from "../components/BlogsInfo.svelte";
+import LinkProfessions from "../components/LinkProfessions.svelte";
 ---
 
 <Layout title="The Mutawwir blog">
@@ -11,9 +12,9 @@ import BlogsInfo from "../components/BlogsInfo.svelte";
         <Background client:load />
     </div>
     <div id="sticky-limit-blogs-info">
-        <BlogsInfo client:load />
+        <BlogsInfo client:visible />
     </div>
-    <div id="link-"></div>
+    <LinkProfessions client:visible />
 </Layout>
 
 <style lang="scss">
