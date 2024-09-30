@@ -13,7 +13,7 @@ const circles = ["python", "javascript", "rust", "kotlin", "html", "css", "go", 
 <div id=grid>
     {#each circles as circle}
         <div class=circle>
-            <img src={`/coding/${circle}.svg`}/>
+            <img src={`/arc/coding/${circle}.svg`} alt={circle}/>
         </div>
     {/each}
 </div>

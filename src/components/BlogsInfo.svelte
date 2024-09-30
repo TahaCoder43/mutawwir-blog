@@ -1,9 +1,9 @@
 <script lang="ts">
-import Roll from "./Roll.svelte"
-import Arc from "./Arc.svelte"
-import ContentRollButton from "./ContentRollButton.svelte"
-import Coding from "./Coding.svelte"
-import Linux from "./Linux.svelte"
+import Roll from "./arc/Roll.svelte"
+import Arc from "./arc/Arc.svelte"
+import ContentRollButton from "./arc/ContentRollButton.svelte"
+import Coding from "./arc/Coding.svelte"
+import ThreeStack from "./arc/ThreeStack.svelte";
 import { onMount } from "svelte";
 
 const scrollEffectLimit = 1500; // modify css variable in Layout.astro too
@@ -117,13 +117,21 @@ onMount(() => {
             <Coding/>
         </div>
         <div class="image-container">
-            <Linux/>
+            <ThreeStack>
+                <img src="/arc/linux/1.png" class=window alt="tmux with btop, gitui, lf"/>
+                <img src="/arc/linux/2.png" class=window alt="inkscape on alpine and sway"/>
+                <img src="/arc/linux/3.png" class=window alt="research and code"/>
+            </ThreeStack>
         </div>
         <div class="image-container">
-            <img src="/arc/introduction.svg" alt="Computer screen with blog posts"/>
+            <img src="/arc/dev-tools.png" alt="Illustration of docker linking to python backend, javascript frontend and postgres database with there respective tools"/>
         </div>
         <div class="image-container">
-            <img src="/arc/introduction.svg" alt="Computer screen with blog posts"/>
+            <ThreeStack>
+                <img src="/arc/ide/dashboard.png" class=window alt="Neovim startup dashboard, using dasboard.nvim"/>
+                <img src="/arc/ide/coding.png" class=window alt="Beutiful neovim coding setup"/>
+                <img src="/arc/ide/git.png" class=window alt="Power of gitui, all inside neovim"/>
+            </ThreeStack>
         </div>
     </Roll>
 </section>
@@ -143,15 +151,6 @@ onMount(() => {
         .spacing {
             flex-shrink: 2;
             width: 100%
-        }
-
-        :global(> section:nth-last-child(1)) {
-            position: absolute;
-            right: 0;
-            top: 0;
-            width: 350px;
-            height: 100%;
-            background-color: transparent;
         }
 
         section {
@@ -179,6 +178,16 @@ onMount(() => {
             }
         }
 
+        :global(> section:nth-last-child(1)) {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 400px;
+            padding-left: 50px;
+            height: 100%;
+            background-color: transparent;
+        }
+
         .image-container {
             display: flex;
             align-items: center;
@@ -186,6 +195,21 @@ onMount(() => {
 
             img {
                 height: 50%;
+            }
+
+            &:nth-child(4) {
+                img {
+                    position: relative;
+                    left: -30px;
+                    height: 55%;
+                }
+            }
+
+            &:nth-child(5) {
+                img {
+                    height: auto;
+                    width: 90%;
+                }
             }
         }
 
@@ -195,6 +219,7 @@ onMount(() => {
 
             width: 100%;
             height: 100px;
+            z-index: 100;
 
             background-image: linear-gradient(var(--direction), transparent, var(--color-background) 80%);
 

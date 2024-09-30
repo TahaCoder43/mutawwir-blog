@@ -75,10 +75,14 @@ function updateArc(currentPresentationIndex: number) {
         <stop offset="0%" stop-color="hsl(270, 100%, 80%)" />
         <stop offset="100%" stop-color="hsl(270, 80%, 50%)" />
     </linearGradient>
+    <filter id="blur">
+        <feGaussianBlur stdDeviation="10"/>
+    </filter>
   </defs>
   <g id="layer1" transform="translate(-696.33604,18.800112)">
     <g id="g4" style="stroke:#131313;stroke-opacity:1">
-      <path id="arc" d="M 1094.7716,-18.050112 C 845.65181,68.908134 746.33144,647.7215 1082.8031,753.83697" />
+      <path id="arc-glow" d="M 1094.7716,-18.050112 C 845.65181,68.908134 746.33144,647.7215 1082.8031,753.83697" />
+      <path id="arc" d="M 1094.7716,-18.050112 C 845.65181,68.908134 746.33144,647.7215 1082.8031,753.83697"/>
       <g id="g1" style="stroke:#131313;stroke-width:1;stroke-dasharray:none;stroke-opacity:1" bind:this={thisLinks}>
         <path class="link" d="M 906.82498,152.61953 854.4767,108.24573" id="path2" />
         <path class="link" d="M 870.95339,261.08041 804.49312,234.86126" id="path2-5" />
@@ -92,9 +96,7 @@ function updateArc(currentPresentationIndex: number) {
         </text>
         <text xml:space="preserve" transform="matrix(0.25541301,0,0,0.25541301,-49.242232,158.09264)" id="text7-2" style="shape-inside:url(#rect7-5);" class={textContrasts[1]}>
             <tspan x="2912.9219" y="301.56444" id="tspan5">Coding</tspan>
-        </text>
-        <text xml:space="preserve" transform="matrix(0.25541301,0,0,0.25541301,-49.841603,308.05047)" id="text7-2-0" style="shape-inside:url(#rect7-5-5);" class={textContrasts[2]}>
-            <tspan x="2912.9219" y="301.56444" id="tspan6">Linux</tspan>
+        </text> <text xml:space="preserve" transform="matrix(0.25541301,0,0,0.25541301,-49.841603,308.05047)" id="text7-2-0" style="shape-inside:url(#rect7-5-5);" class={textContrasts[2]}> <tspan x="2912.9219" y="301.56444" id="tspan6">Linux</tspan>
         </text>
         <text xml:space="preserve" transform="matrix(0.25541301,0,0,0.25541301,-48.806326,484.56782)" id="text7-2-0-9" style="shape-inside:url(#rect7-5-5-8);" class={textContrasts[3]}>
             <tspan x="2912.9219" y="301.56444" id="tspan7">Dev  Tools</tspan>
@@ -120,6 +122,17 @@ function updateArc(currentPresentationIndex: number) {
             stroke-dashoffset: 8.25;
             stroke-linecap: round;
             stroke-linejoin: round;
+        }
+
+        #arc-glow {
+            fill:none;
+            stroke:url(#arcGradient);
+            stroke-width: 10;
+            stroke-dasharray: 102, 10;
+            stroke-dashoffset: 8.25;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            filter: url(#blur);
         }
 
         .link {

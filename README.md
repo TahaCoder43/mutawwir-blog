@@ -14,13 +14,14 @@ This blog should lead to my portfolio, so the about us page, will lead to anothe
 
 # Today TODO
 
+perhaps adding small skewX with large skewY like `skew(5deg, 15deg)` would make it look more realistic
 Add 3d linux logos of alpine, KDE, Kali, Zorin OS, Fedora, NixOs to the linux section in the arc
 
 
 # TODO
 - [x] [Hero background](#Background)
 - [] [In-page Navbar](#In-page Navbar)
-- [] [image-text arc](#Arc)
+- [x] [image-text arc](#Arc)
 - [] [Seemless seperators section](#Seemless lines) 
 - [] showcase section on home page, that shows all my cool projects I have undertaken. Or perhaps this should be in portfolio, or in both
 
@@ -42,6 +43,4 @@ do good SEO
 # Seemless lines
 add a seemless section with lines as seperators, each with heading, text and simple illustrative picture to tell what it's about
 
-This section to lead to my freelancing, neural nexus institute , and usage of various linux related info
-
-make an illustration for the seamless section above that represents a laptop with window manager, with island style topbar, and tilling WM look. This should be for linux related info
+This section to lead to my freelancing, neural nexus institute , and github

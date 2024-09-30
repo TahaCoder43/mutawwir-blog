@@ -1,15 +1,14 @@
 <div id=stack>
-    <img src="/linux/1.png" alt="tmux with btop, gitui, lf"/>
-    <img src="/linux/2.png" alt="inkscape on alpine and sway"/>
-    <img src="/linux/3.png" alt="research and code"/>
+    <slot />
 </div>
 
 <style lang="scss">
     #stack {
         height: 350px;
         width: 350px;
+        position: relative;
 
-        img {
+        :global(.window) {
             position: relative;
             display: block;
 
@@ -19,18 +18,21 @@
             border: 2px solid var(--accent-color);
             box-shadow: 3px 5px 10px 2px #000a;
             border-radius: 5px;
-            transform: skewY(15deg) rotateY(20deg);
+            transform: skew(0deg, 15deg) rotateY(20deg);
+
+            --top: -30px;
 
             &:nth-child(1) {
                 right: -20px;
+                top: var(--top);
             }
 
             &:nth-child(2) {
-                top: -50px;
+                top: calc(-50px + var(--top));
             }
 
             &:nth-child(3) {
-                top: -100px;
+                top: calc(-100px + var(--top));
                 left: -20px;
             }
         }
