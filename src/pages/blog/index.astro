@@ -1,6 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import Blog from "../../components/blog/Blog.svelte";
+import AlternateBlog from "../../components/blog/AlternateBlog.svelte";
 ---
 
 <Layout title="Blogs">
@@ -29,7 +30,9 @@ import Blog from "../../components/blog/Blog.svelte";
 
         .blogs {
             display: flex;
+            justify-content: flex-start;
             column-gap: 20px;
+
             overflow-x: scroll;
             padding-bottom: 20px;
 
