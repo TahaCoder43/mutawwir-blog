@@ -6,7 +6,7 @@ import Coding from "./arc/Coding.svelte"
 import ThreeStack from "./arc/ThreeStack.svelte";
 import { onMount } from "svelte";
 
-const scrollEffectLimit = 1500; // modify css variable in Layout.astro too
+export let scrollEffectLimit: number; // modify css variable in Layout.astro too
 let thisBlogsInfo: HTMLElement;
 let stickyLimitTop: number;
 let currentPresentationIndex: number = 0;
@@ -61,50 +61,50 @@ onMount(() => {
     <div class={["fade", "top"].join(" ")}></div>
     <div class={["fade", "bottom"].join(" ")}></div>
     <Roll {currentPresentationIndex} >
-        <section>
+        <section id=introduction>
             <h2>Introduction</h2>
             <p>
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus non atque esse iure nisi adipisci
                 quod quasi explicabo vero quibusdam, harum beatae iste alias, aliquam ullam laborum praesentium!
                 Excepturi, officia. Include here what mutawwir means in arabic, and what hte blog is about
             </p>
-            <BouncyButton> Read </BouncyButton>
+            <BouncyButton title="Go to blogs overview"> Overview </BouncyButton>
         </section>
-        <section>
+        <section id=coding>
             <h2>Coding</h2>
             <p>
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus non atque esse iure nisi adipisci
                 quod quasi explicabo vero quibusdam, harum beatae iste alias, aliquam ullam laborum praesentium!
                 Excepturi, officia.
             </p>
-            <BouncyButton>Read</BouncyButton>
+            <BouncyButton title="Go to coding blogs">Learn</BouncyButton>
         </section>
-        <section>
+        <section id=linux>
             <h2>Linux</h2>
             <p>
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus non atque esse iure nisi adipisci
                 quod quasi explicabo vero quibusdam, harum beatae iste alias, aliquam ullam laborum praesentium!
                 Excepturi, officia.
             </p>
-            <BouncyButton>Read</BouncyButton>
+            <BouncyButton title="Go to linux blogs">Read</BouncyButton>
         </section>
-        <section>
+        <section id=dev-tools>
             <h2>Dev-tools</h2>
             <p>
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus non atque esse iure nisi adipisci
                 quod quasi explicabo vero quibusdam, harum beatae iste alias, aliquam ullam laborum praesentium!
                 Excepturi, officia.
             </p>
-            <BouncyButton>Read</BouncyButton>
+            <BouncyButton title="Go to dev-tools blogs">Find out</BouncyButton>
         </section>
-        <section>
+        <section id=ide>
             <h2>IDE & Code-Editors</h2>
             <p>
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus non atque esse iure nisi adipisci
                 quod quasi explicabo vero quibusdam, harum beatae iste alias, aliquam ullam laborum praesentium!
                 Excepturi, officia.
             </p>
-            <BouncyButton>Read</BouncyButton>
+            <BouncyButton title="Go to IDE blogs">Check out</BouncyButton>
         </section>
     </Roll>
     <Arc {currentPresentationIndex} />

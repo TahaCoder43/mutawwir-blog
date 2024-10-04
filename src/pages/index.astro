@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.svelte";
+import InPageNavbar from "../components/InPageNavbar.svelte";
 import Background from "../components/Background.svelte";
 import BlogsInfo from "../components/BlogsInfo.svelte";
 import LinkProfessions from "../components/LinkProfessions.svelte";
@@ -17,7 +18,8 @@ const blogsInfoStickLimit = 1500;
 ---
 
 <Layout title="The Mutawwir blog">
-    <Hero client:load />
+    <Hero />
+    <InPageNavbar {blogsInfoStickLimit} client:load />
     <div id="sticky-limit-video-background">
         <Background scrollEffectLimit={bgVideoLimits.scrollEffect} client:load />
     </div>

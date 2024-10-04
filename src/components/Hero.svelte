@@ -1,7 +1,6 @@
-
 <section id="hero">
     <div id="content">
-        <h1>
+        <h1 id=main>
             <div id="darken"></div>
             The <span class="highlight">Mutawwir</span> Blog
         </h1>

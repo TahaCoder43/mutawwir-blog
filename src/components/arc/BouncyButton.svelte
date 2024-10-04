@@ -1,6 +1,7 @@
 <script lang="ts">
 
-export let href: string = null;
+export let href: string | null = null, title: string | null = null;
+
 let clicked = false;
 
 function handleClick() {
@@ -11,7 +12,7 @@ function handleClick() {
 
 </script>
 
-<a on:click={handleClick} {href} class:clicked={clicked}>
+<a on:click={handleClick} {href} class:clicked={clicked} title={title}>
     <slot/>
 </a>
 
