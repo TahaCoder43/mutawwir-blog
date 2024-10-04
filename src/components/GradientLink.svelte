@@ -54,7 +54,7 @@
         text-decoration: none;
         font-weight: 700;
         font-size: 1.2rem;
-        color: var(--hero-low-contrast);
+        color: rgb(var(--light), var(--light), var(--light));
 
         border-bottom: solid 2px #50f0;
         border-radius: 5px;
@@ -63,6 +63,8 @@
         background-clip: text;
 
         transition: color 0.5s, border-bottom-color 0.3s;
+
+        --light: calc(210 - (150 * var(--scrolled-perc)));
 
         &:hover {
             color: transparent;

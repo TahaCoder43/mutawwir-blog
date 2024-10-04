@@ -4,22 +4,39 @@
     import Linkedin from "./svgs/socials/Linkedin.svelte"
 
     let visibility = "shown";
+    let scrolledPerc= 0;
+    $: scrolledPercVar = `--scrolled-perc: ${scrolledPerc};`
+    let scrollEffectLimit = 200;
+
+    function hideAndShow(priorScrollTop: number, scrollTop: number) {
+        let scrolledDown = scrollTop > priorScrollTop
+        let scrolledUp = scrollTop < priorScrollTop
+
+        if (scrolledDown) {
+            visibility = "hidden"
+        } else if (scrolledUp) {
+            visibility = ""
+        } else {
+            console.log("No movement on scroll event fired, is possible")
+        }
+    }
+
+    function updateScrollPerc(scrollTop: number) {
+        const excededScrollEffectLimit = (scrollTop > scrollEffectLimit)
+        if (excededScrollEffectLimit) {
+            scrolledPerc = 1 
+            return
+        }
+        scrolledPerc = scrollTop / scrollEffectLimit
+
+    }
 
     const handleScroll = (function() {
         let priorScrollTop = 0
         return () => {
             let scrollTop = document.documentElement.scrollTop
-            let scrolledDown = scrollTop > priorScrollTop
-            let scrolledUp = scrollTop < priorScrollTop
-
-            if (scrolledDown) {
-                visibility = "hidden"
-            } else if (scrolledUp) {
-                visibility = ""
-            } else {
-                console.log("No movement on scroll event fired, is possible")
-            }
-
+            hideAndShow(priorScrollTop, scrollTop)
+            updateScrollPerc(scrollTop)
             priorScrollTop = scrollTop
         }
     })()
@@ -32,8 +49,8 @@
 
 </script>
 
-<nav class={visibility}>
-    <img src="/logo.jpg" alt="Logo for mutwawwir blog" id=logo />
+<nav class={visibility} style={scrolledPercVar}>
+    <img src="/logo.png" alt="Logo for mutwawwir blog" id=logo />
     <span id=page-links>
         <slot />
     </span>
@@ -57,10 +74,13 @@
         align-items: center;
         height: var(--navbar-height);
         padding-inline: 20px;
-        backdrop-filter: blur(10px);
-        background-color: #0008;
-        box-shadow: 0 2px 20px 4px #000a;
+        backdrop-filter: blur(30px) saturate(1.3);
+        background-color: rgba(0, 0, 0, var(--opacity));
+        box-shadow: 0 2px 20px 4px rgba(0, 0, 0, var(--box-shadow-opacity));
         transition: top 0.3s;
+
+        --opacity: calc(0.5 - (0.4 * var(--scrolled-perc)));
+        --box-shadow-opacity: calc(0.7 - (0.4 * var(--scrolled-perc)));
 
         &.hidden {
             top: calc(var(--navbar-height) * -1.2) !important;
@@ -91,10 +111,12 @@
                 height: 3rem;
                 font-size: 2rem;
 
-                color: var(--hero-verylow-contrast);
+                color: rgb(var(--light), var(--light), var(--light));
                 border-radius: 5px;
 
                 transition: color 0.3s, font-size 0.3s;
+
+                --light: calc(190 - (90 * var(--scrolled-perc)));
 
                 &:hover {
                     color: #eee;
