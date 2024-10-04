@@ -4,20 +4,36 @@ import Hero from "../components/Hero.svelte";
 import Background from "../components/Background.svelte";
 import BlogsInfo from "../components/BlogsInfo.svelte";
 import LinkProfessions from "../components/LinkProfessions.svelte";
+
+const bgVideoLimits = {
+    scrollEffect: 450,
+    pause: 150,
+    get stick() {
+        return this.scrollEffect + this.pause;
+    },
+};
+
+const blogsInfoStickLimit = 1500;
 ---
 
 <Layout title="The Mutawwir blog">
     <Hero client:load />
     <div id="sticky-limit-video-background">
-        <Background client:load />
+        <Background scrollEffectLimit={bgVideoLimits.scrollEffect} client:load />
     </div>
     <div id="sticky-limit-blogs-info">
-        <BlogsInfo client:visible />
+        <BlogsInfo scrollEffectLimit={blogsInfoStickLimit} client:visible />
     </div>
     <LinkProfessions client:visible />
 </Layout>
 
-<style lang="scss">
+<style
+    lang="scss"
+    define:vars={{
+        "background-video-stick-limit": `${bgVideoLimits.stick}px`,
+        "blogs-info-stick-limit": `${blogsInfoStickLimit}px`,
+    }}
+>
     #sticky-limit-video-background {
         position: absolute;
         left: 0;
