@@ -1,0 +1,47 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Blog from "../../components/blog/Blog.svelte";
+---
+
+<Layout title="Blogs">
+    <section id="fresh">
+        <h1>Read Fresh Blogs</h1>
+        <div class="blogs">
+            <Blog />
+            <Blog />
+            <Blog />
+            <Blog />
+            <div class="fade"></div>
+        </div>
+    </section>
+</Layout>
+
+<style lang="scss">
+    section {
+        padding-left: 50px;
+
+        h1,
+        h2 {
+            font-family: var(--heading-font);
+            font-size: 2rem;
+            color: var(--high-contrast);
+        }
+
+        .blogs {
+            display: flex;
+            column-gap: 20px;
+            overflow-x: scroll;
+            padding-bottom: 20px;
+
+            .fade {
+                position: fixed;
+                right: 0;
+
+                min-width: 100px;
+                height: 100%;
+
+                background-image: linear-gradient(to right, transparent, var(--color-background));
+            }
+        }
+    }
+</style>
