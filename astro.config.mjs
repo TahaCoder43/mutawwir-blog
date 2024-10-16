@@ -1,9 +1,14 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
-
-import svelte from '@astrojs/svelte';
+import { defineConfig } from "astro/config";
+import svelte from "@astrojs/svelte";
+import mdx from "@astrojs/mdx";
+import remarkSectionize from "remark-sectionize";
+import remarkGithubAlerts from "remark-github-alerts";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [svelte()]
+    markdown: {
+        remarkPlugins: [remarkSectionize, remarkGithubAlerts],
+    },
+    integrations: [svelte(), mdx()],
 });

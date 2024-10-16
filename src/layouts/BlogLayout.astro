@@ -1,0 +1,110 @@
+---
+import Layout from "./Layout.astro";
+import type { CollectionEntry } from "astro:content";
+
+import BlogTitle from "../components/blog/BlogTitle.svelte";
+import BlogBackground from "../components/blog/BlogBackground.svelte";
+import InfoBar from "../components/blog/InfoBar.svelte";
+import BlogActions from "../components/blog/BlogActions.svelte";
+import TableOfContent from "../components/blog/TableOfContent.svelte";
+
+import "remark-github-alerts/styles/github-base.css";
+import "remark-github-alerts/styles/github-colors-light.css";
+
+interface Props {
+    blog: CollectionEntry<"blog">;
+}
+
+const blog = Astro.props.blog;
+const { title, alterH1Title, description, img, reasons, practicalSectionId } = blog.data;
+const { headings } = await blog.render();
+const backgroundScrollEffectLimit = 300;
+
+const hasReasons = reasons !== undefined;
+const hasPracticalSectionId = practicalSectionId !== undefined;
+const hasAlterH1Title = alterH1Title !== undefined;
+const isMediumTitle = title.length >= 30;
+const isLongTitle = title.length >= 50;
+---
+
+<Layout {title} {description}>
+    <BlogBackground {img} scrollEffectLimit={backgroundScrollEffectLimit} client:load />
+    <article>
+        <BlogTitle {backgroundScrollEffectLimit} {isLongTitle} {isMediumTitle} client:load>
+            {hasAlterH1Title ? alterH1Title : title}
+        </BlogTitle>
+        {hasPracticalSectionId && <BlogActions {practicalSectionId} client:load />}
+        <section id="content">
+            <slot />
+        </section>
+        {hasReasons && <InfoBar {reasons} client:load />}
+        <TableOfContent {headings} />
+    </article>
+</Layout>
+
+<style lang="scss" is:global>
+    *::-webkit-scrollbar {
+        height: 4px;
+    }
+
+    section#content {
+        max-width: 800px;
+        margin-inline: auto;
+        font-size: 1.2rem;
+
+        section {
+            > h2 {
+                color: var(--high-contrast);
+                font-family: Poppins, sans-serif;
+                font-size: 3rem;
+                font-weight: 700;
+                margin-bottom: 10px;
+            }
+
+            > p,
+            > div.markdown-alert > p:not(.markdown-alert-title),
+            > ul > li,
+            > ol > li {
+                color: var(--medium-contrast);
+                > code {
+                    background-color: hsl(270, 100%, 85%);
+                    border-radius: 10px;
+                    padding-inline: 5px;
+                    font-size: 1rem;
+                }
+            }
+
+            > pre {
+                padding: 10px;
+                border-radius: 5px;
+                font-size: 0.9rem;
+                box-shadow: 2px 3px 8px 2px #0008;
+            }
+
+            div.markdown-alert {
+                padding-block: 20px;
+                border-radius: 10px;
+
+                &.markdown-alert-note {
+                    background-color: #0969da33;
+                }
+
+                &.markdown-alert-important {
+                    background-color: #8250df33;
+                }
+
+                &.markdown-alert-tip {
+                    background-color: #1a7f3733;
+                }
+
+                &.markdown-alert-warning {
+                    background-color: #9a670033;
+                }
+
+                &.markdown-alert-caution {
+                    background-color: #d1242f33;
+                }
+            }
+        }
+    }
+</style>

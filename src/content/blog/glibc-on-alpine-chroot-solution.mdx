@@ -1,0 +1,104 @@
+---
+title: GlibC on Alpine, Chroot it!
+description: The chroot solution to running glib-c applications on musl-c based alpine linux
+tags: [Linux,Alpine,Glib-C,Musl-C,Chroot]
+publishDate: 2024-10-08
+dificulty: Hard
+img:
+    path: /blog/banners/SnowycapsMilkyway.jpg
+    alt: Snowcaps Mountains with milkyway glaxy visible on the sky
+reasons: ["I know of one reason, that is to install propietary software that does not have pre-compiled Musl-C version. Aside from that, there isn't any reason to get Glib-C support (except maybe because you are bad at compiling and can't compile). Glib-C support may be complicated, and also heavy on the system a lot of times", "Arch is easy to use compared to Gentoo, and it has a lot of packages compared to Debian. To be honest, Arch chroot was much easier to setup than I expected"]
+practicalSectionId: glib-c-chroot
+---
+
+import Reason from "../../components/blog/Reason.svelte"
+
+## Introduction
+
+Have you ever faced this
+
+```console
+User@Host:~$ application
+Error relocating /usr/bin/application/libfoo.so.1: foosymbol: symbol not found
+```
+
+Well that is because applications compiled in Glib-C can't be ran on Musl-C. So what's the solution? Many!
+
+- Recompile the application in Musl-C [(Read this article)](https://example.com)
+- Somehow get Glib-C support in Musl-C
+
+In this article we we'll look at Getting Glib-C support. <Reason client:load/> for Glib-C support over Recompiling. First of all you should try this simple solution `sudo apk add gcompat`. This may just solve your problem, if not then there are multiple other ways to run Glib-C application.
+
+- Flatpak (Easiest solution, but not every application is on flathub)
+- Docker Container
+- GlibMus-HQ
+- Nix-pkg (maybe)
+- Fake Mounts
+- Chroot that has Glib-C
+
+Each of these solutions will eat a few GBs. Yikes! {/* Add which solution is the lightest over here */}. In this article we will look at the last solution
+
+## Glib-C Chroot
+
+Alpine wiki has a [guide on running Glib-C applications](https://wiki.alpinelinux.org/wiki/Running_glibc_programs). Among Gentoo and Debian chroots, it has an [option to use Arch-chroot](https://wiki.alpinelinux.org/wiki/Running_glibc_programs#Arch_Linux), but the guide to it is a little outdated and incomplete, here's the steps. <Reason client:load/> to use Arch over Gentoo and Debian
+
+```bash
+sudo apk add arch-install-scripts
+mkdir ~/Chroots && cd ~/Chroots # I like to keep my chroots here
+# this link was outdated on the wiki
+curl -o "https://mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-2024.10.01-x86_64.tar.zst"
+tar --zstd -xf archlinux-bootstrap-2024.10.01-x86_64.tar.zst
+sudo sed -i '/evowise/s/^#//' root.x86_64/etc/pacman.d/mirrorlist # Commenting out all mirrors
+sudo sed -i '/CheckSpace/s/^/#/' root.x86_64/etc/pacman.conf
+sudo arch-chroot root.x86_64
+```
+
+then in the chroot Run
+
+```bash
+pacman-key --init
+pacman-key --populate archlinux
+```
+
+Now go inside `root.x86_64/etc/pacman.d/mirrorlist` (using `nano`) and uncomment one mirror then run `pacman -Syu` for system update. Now run `pacman -Syu package` to install any package. 
+
+> [!IMPORTANT]
+> There is one problem tho, pacman will install from core and extra repos have 265 and ~15000 packages respectively, whereas the AUR (Arch User Repository) has ~94,000 packages! (Source: [Arch Package Search](https://archlinux.org/packages/https://archlinux.org/packages/)) So let's setup the AUR helper
+
+## Setting up AUR (Arch User Repository)
+
+You first need to create a user
+
+```bash
+useradd -m user
+passwd user
+```
+
+Next give the neccesary permissions
+
+1. edit `/etc/sudoers` (using `nano`) and uncomment this line `%wheel ALL=(ALL:ALL) NOPASSWD: ALL`
+2. then run `groupmod -aU user wheel`
+
+Now install yay
+
+```bash
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si
+```
+
+Now you can install a package `yay -S package_name`
+
+> [!CAUTION]
+> Any user can upload any package on AUR, theoretically one could upload malware, disguised as a software, see this [forum post](https://forum.manjaro.org/t/how-safe-is-aur-and-pacman-in-general/57259/6) and [reddit post](https://www.reddit.com/r/archlinux/comments/3yiq4s/is_the_aur_safe_to_use/)
+
+{/* ```mermaid
+graph TD;
+    A--\>B;
+    A--\>C;
+    B--\>C;
+    C--\>D;
+``` */}
+
+
+
