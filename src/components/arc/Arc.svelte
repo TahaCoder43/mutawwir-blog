@@ -4,46 +4,46 @@ export let currentPresentationIndex: number;
 let thisArcGradient: SVGLinearGradientElement;
 let thisLinks: SVGElement;
 let priorPresentatoinIndex: number = 0;
-let textContrasts = new Array(5).map((_) => "")
+let textContrasts = new Array(5).map((_) => "");
 const allArcOffsets = [
     ["0%", "20%", "40%"],
     ["20%", "40%", "48%"],
     ["32%", "48%", "64%"],
     ["48%", "64%", "80%"],
     ["64%", "80%", "96%"],
-]
+];
 
-let priorArcOffsets: string[] = ["0%", "20%", "40%"]
-let currentArcOffsets: string[] = ["0%", "20%", "40%"]
-$: updateArc(currentPresentationIndex)
-$: console.log(priorPresentatoinIndex, currentPresentationIndex, priorArcOffsets, currentArcOffsets)
+let priorArcOffsets: string[] = ["0%", "20%", "40%"];
+let currentArcOffsets: string[] = ["0%", "20%", "40%"];
+$: updateArc(currentPresentationIndex);
+$: console.log(priorPresentatoinIndex, currentPresentationIndex, priorArcOffsets, currentArcOffsets);
 
 function updateArc(currentPresentationIndex: number) {
-    textContrasts[priorPresentatoinIndex] = ""
-    textContrasts[currentPresentationIndex] = "highlight"
+    textContrasts[priorPresentatoinIndex] = "";
+    textContrasts[currentPresentationIndex] = "highlight";
 
-    priorArcOffsets = allArcOffsets[priorPresentatoinIndex]
-    currentArcOffsets = allArcOffsets[currentPresentationIndex]
+    priorArcOffsets = allArcOffsets[priorPresentatoinIndex];
+    currentArcOffsets = allArcOffsets[currentPresentationIndex];
     if (thisArcGradient !== undefined) {
         Array.from(thisArcGradient.children).map(stop => stop.firstChild).forEach(animate => {
             if (!(animate instanceof SVGAnimateElement)) {
-                throw TypeError("thisArcGradient should have <animate/> as children")
-            }
-            animate.beginElement()
-        })
-    }
+                throw TypeError("thisArcGradient should have <animate/> as children");
+            };
+            animate.beginElement();
+        });
+    };
 
     if (thisLinks !== undefined) {
-        let currentLink = thisLinks.querySelector(`path:nth-child(${currentPresentationIndex+1})`)
-        let priorLink = thisLinks.querySelector(`path:nth-child(${priorPresentatoinIndex+1})`)
+        let currentLink = thisLinks.querySelector(`path:nth-child(${currentPresentationIndex+1})`);
+        let priorLink = thisLinks.querySelector(`path:nth-child(${priorPresentatoinIndex+1})`);
         if (currentLink === null || priorLink === null) {
-            throw TypeError(`currentLink:${currentLink} or priorLink:${priorLink} should not be null`)
-        }
-        currentLink.classList.add("highlight")
-        priorLink.classList.remove("highlight")
-    }
+            throw TypeError(`currentLink:${currentLink} or priorLink:${priorLink} should not be null`);
+        };
+        currentLink.classList.add("highlight");
+        priorLink.classList.remove("highlight");
+    };
 
-    priorPresentatoinIndex = currentPresentationIndex
+    priorPresentatoinIndex = currentPresentationIndex;
 }
 
 </script>

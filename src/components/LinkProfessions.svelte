@@ -20,7 +20,7 @@
 
 <section id="link-professions" bind:this={thisLinkProfessions}>
     <section class="hidden">
-        <img src="/link-professions/purrgrammer.jpg" alt="Cat on chair with triple monitor setup"/>
+        <img src="/link-professions/programmer-cat.jpg" alt="Purrgrammer: Cat on chair with triple monitor setup"/>
         <h2>Work</h2>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, debitis enim explicabo saepe officiis dolorum!</p>
         <BouncyButton title="Goto my portfolio">Order</BouncyButton>
@@ -34,7 +34,7 @@
     </section>
     <div id=seperator />
     <section class="hidden">
-        <img src="/link-professions/github.png" alt="Glassmorphic, Acryic, Translucent logo design of github logo"/>
+        <img src="/link-professions/glassmorphic-github-logo.png" alt="Glassmorphic, Acryic, Translucent logo design of github logo"/>
         <h2>Github</h2>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, debitis enim explicabo saepe officiis dolorum!</p>
         <BouncyButton title="Goto my github">Check</BouncyButton>

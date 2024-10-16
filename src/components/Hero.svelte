@@ -5,8 +5,7 @@
             The <span class="highlight">Mutawwir</span> Blog
         </h1>
         <p>
-            Read about coding, linux, softwares, TUI, CLI tools, Dev tools, IDE, frameworks, web development and
-            much more.
+            Cut to the Code, No-Nonsense Tech Blogs about Coding, Linux, Dev-tools, IDEs, Infrastructure and more!
         </p>
         <div id="action-menu">
             <a href="/blog/" data-title="Go to blog page">Read!</a>
@@ -65,7 +64,7 @@
             }
 
             p {
-                font-size: 1.2rem;
+                font-size: 1.5rem;
                 color: var(--hero-low-contrast);
                 justify-self: center;
                 width: 100%;

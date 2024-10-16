@@ -1,32 +1,32 @@
 <script lang="ts">
-    import { getContext } from "svelte";
 
+import { getContext } from "svelte";
 
 export let href: string;
 let thisAnchor: HTMLAnchorElement;
-let blogsInfoStickLimit:number = getContext("blogsInfoStickLimit")
+let blogsInfoStickLimit:number = getContext("blogsInfoStickLimit");
 
 
 function getElementToScrollTo(link: EventTarget): [HTMLElement, string] | null {
     if (!("href" in link && typeof link.href === "string")) {
-        throw TypeError("link should have attribute href and href type should be string")
-    }
+        throw TypeError("link should have attribute href and href type should be string");
+    };
 
-    const hashIndex = link.href.indexOf("#")
-    const hash = link.href.slice(hashIndex)
-    const elementType = hash === "#main" ? "h1" : "section"
-    const element = document.querySelector(`${elementType}${hash}`)
+    const hashIndex = link.href.indexOf("#");
+    const hash = link.href.slice(hashIndex);
+    const elementType = hash === "#main" ? "h1" : "section";
+    const element = document.querySelector(`${elementType}${hash}`);
 
     if (element === null) {
-        console.error("element to scroll to is null")
-        return null
-    }
+        console.error("element to scroll to is null");
+        return null;
+    };
 
     if (!(element instanceof HTMLElement)) {
-        throw TypeError("You can only scroll to HTMlElement")
-    }
+        throw TypeError("You can only scroll to HTMlElement");
+    };
 
-    return [element, hash]
+    return [element, hash];
 }
 
 function getBlogInfoelementPosition(section: HTMLElement) {
@@ -36,30 +36,30 @@ function getBlogInfoelementPosition(section: HTMLElement) {
         section.parentElement.parentElement.parentElement === null ||
         section.parentElement.parentElement.parentElement.parentElement === null
     ) {
-        throw TypeError("section should have parents till great great grandparent")
-    }
+        throw TypeError("section should have parents till great great grandparent");
+    };
 
-    const contentRoll = section.parentElement
-    const blogsInfoStickLimitParent = section.parentElement.parentElement.parentElement.parentElement
+    const contentRoll = section.parentElement;
+    const blogsInfoStickLimitParent = section.parentElement.parentElement.parentElement.parentElement;
 
-    const sectionIndex = Array.from(contentRoll.children).indexOf(section)
-    const sectionOffsetTop = (blogsInfoStickLimit / 5) * sectionIndex
+    const sectionIndex = Array.from(contentRoll.children).indexOf(section);
+    const sectionOffsetTop = (blogsInfoStickLimit / 5) * sectionIndex;
 
-    console.log("ancestors offset:", sectionOffsetTop, blogsInfoStickLimitParent.offsetTop)
+    console.log("ancestors offset:", sectionOffsetTop, blogsInfoStickLimitParent.offsetTop);
 
-    const scrollToPx = blogsInfoStickLimitParent.offsetTop + sectionOffsetTop + 1
-    return scrollToPx
+    const scrollToPx = blogsInfoStickLimitParent.offsetTop + sectionOffsetTop + 1;
+    return scrollToPx;
     }
 
 function prepareHandleClick(link: HTMLAnchorElement) {
-    const result = getElementToScrollTo(link)
+    const result = getElementToScrollTo(link);
     if (result === null) {
-        return
-    }
-    const [element, hash] = result
+        return;
+    };
+    const [element, hash] = result;
 
     let scrollToPx = element.offsetTop;
-    let scrollBehaviour: ScrollBehavior = "smooth" 
+    let scrollBehaviour: ScrollBehavior = "smooth" ;
 
 
     switch (hash.slice(1)) {
@@ -67,27 +67,27 @@ function prepareHandleClick(link: HTMLAnchorElement) {
             scrollToPx = 0;
             break;
         case "introduction":
-            scrollToPx = getBlogInfoelementPosition(element)
+            scrollToPx = getBlogInfoelementPosition(element);
             break;
         case "coding":
-            scrollToPx = getBlogInfoelementPosition(element)
+            scrollToPx = getBlogInfoelementPosition(element);
             break;
         case "linux":
-            scrollToPx = getBlogInfoelementPosition(element)
+            scrollToPx = getBlogInfoelementPosition(element);
             break;
         case "dev-tools":
-            scrollToPx = getBlogInfoelementPosition(element)
+            scrollToPx = getBlogInfoelementPosition(element);
             break;
         case "ide":
-            scrollToPx = getBlogInfoelementPosition(element)
+            scrollToPx = getBlogInfoelementPosition(element);
             break;
     }
 
-    console.log("scrollToPx:", scrollToPx)
+    console.log("scrollToPx:", scrollToPx);
 
     return () => {
-        scrollTo({top: scrollToPx, behavior: scrollBehaviour})
-    }
+        scrollTo({top: scrollToPx, behavior: scrollBehaviour});
+    };
 }
 
 </script>

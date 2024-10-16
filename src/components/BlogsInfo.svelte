@@ -1,12 +1,12 @@
 <script lang="ts">
-import Roll from "./arc/Roll.svelte"
-import Arc from "./arc/Arc.svelte"
-import BouncyButton from "./arc/BouncyButton.svelte"
-import Coding from "./arc/Coding.svelte"
+import Roll from "./arc/Roll.svelte";
+import Arc from "./arc/Arc.svelte";
+import BouncyButton from "./arc/BouncyButton.svelte";
+import Coding from "./arc/Coding.svelte";
 import ThreeStack from "./arc/ThreeStack.svelte";
 import { onMount } from "svelte";
 
-export let scrollEffectLimit: number; // modify css variable in Layout.astro too
+export let scrollEffectLimit: number;
 let thisBlogsInfo: HTMLElement;
 let stickyLimitTop: number;
 let currentPresentationIndex: number = 0;
@@ -14,46 +14,46 @@ let scrolledPerc: number;
 
 class NoParentError extends Error {
     constructor(msg: string) {
-        super(msg)
+        super(msg);
         
-        Object.setPrototypeOf(this, NoParentError.prototype)
-    }
-}
+        Object.setPrototypeOf(this, NoParentError.prototype);
+    };
+};
 
 function updateCurrentPresentationIndex() {
 
     const scrollTop = document.documentElement.scrollTop;
-    const scrolled = scrollTop - stickyLimitTop
-    const excededScrollEffectLimit = (scrolled > scrollEffectLimit)
-    const notReachedScrollEffectArea = (scrolled < 0)
+    const scrolled = scrollTop - stickyLimitTop;
+    const excededScrollEffectLimit = (scrolled > scrollEffectLimit);
+    const notReachedScrollEffectArea = (scrolled < 0);
 
     if (excededScrollEffectLimit) {
-        scrolledPerc = 0.99
+        scrolledPerc = 0.99;
     } else if (notReachedScrollEffectArea) {
-        scrolledPerc = 0
+        scrolledPerc = 0;
     } else {
-        scrolledPerc = scrolled / (scrollEffectLimit+1)
-    }
+        scrolledPerc = scrolled / (scrollEffectLimit+1);
+    };
 
-    currentPresentationIndex = Math.floor(scrolledPerc * 5.0)
-}
+    currentPresentationIndex = Math.floor(scrolledPerc * 5.0);
+};
 
 
 onMount(() => {
-    const island = thisBlogsInfo.parentElement
+    const island = thisBlogsInfo.parentElement;
     if (island === null) {
-        throw new NoParentError("BlogInfo should have a parent island")
-    }
+        throw new NoParentError("BlogInfo should have a parent island");
+    };
 
-    const stickyLimit = island.parentElement
+    const stickyLimit = island.parentElement;
     if (stickyLimit === null) {
-        throw new NoParentError("BlogInfo's island should have a sticky limit parent")
-    }
+        throw new NoParentError("BlogInfo's island should have a sticky limit parent");
+    };
 
-    stickyLimitTop = stickyLimit.offsetTop
-    updateCurrentPresentationIndex()
-    document.addEventListener("scroll", updateCurrentPresentationIndex)
-})
+    stickyLimitTop = stickyLimit.offsetTop;
+    updateCurrentPresentationIndex();
+    document.addEventListener("scroll", updateCurrentPresentationIndex);
+});
 
 </script>
 
@@ -118,9 +118,9 @@ onMount(() => {
         </div>
         <div class="image-container">
             <ThreeStack>
-                <img src="/arc/linux/1.png" class=window alt="tmux with btop, gitui, lf"/>
-                <img src="/arc/linux/2.png" class=window alt="inkscape on alpine and sway"/>
-                <img src="/arc/linux/3.png" class=window alt="research and code"/>
+                <img src="/arc/linux/tmux-with-btop-gitui-lf.png" class=window alt="tmux with btop, gitui, lf"/>
+                <img src="/arc/linux/inkscape-code-logo.png" class=window alt="inkscape on alpine and sway"/>
+                <img src="/arc/linux/sway-demonstration.png" class=window alt="research and code"/>
             </ThreeStack>
         </div>
         <div class="image-container">
@@ -128,9 +128,9 @@ onMount(() => {
         </div>
         <div class="image-container">
             <ThreeStack>
-                <img src="/arc/ide/dashboard.png" class=window alt="Neovim startup dashboard, using dasboard.nvim"/>
-                <img src="/arc/ide/coding.png" class=window alt="Beutiful neovim coding setup"/>
-                <img src="/arc/ide/git.png" class=window alt="Power of gitui, all inside neovim"/>
+                <img src="/arc/ide/dashboard-nvim.png" class=window alt="Neovim startup dashboard, using dasboard.nvim"/>
+                <img src="/arc/ide/nvim-nvchad.png" class=window alt="Beutiful neovim coding setup"/>
+                <img src="/arc/ide/nvim-git.png" class=window alt="Power of gitui, all inside neovim"/>
             </ThreeStack>
         </div>
     </Roll>
