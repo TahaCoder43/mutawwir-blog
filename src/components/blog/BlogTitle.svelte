@@ -26,11 +26,9 @@ onMount(() => {
 </script>
 
 <svelte:document on:scroll={handleScroll} />
-<header>
-    <h1 id='title' style={backgroundScrollEffectLimitVar + opacityVar} class:medium={isMediumTitle} class:small={isLongTitle}>
-        <slot/>
-    </h1>
-</header>
+<h1 id='title' style={backgroundScrollEffectLimitVar + opacityVar} class:medium={isMediumTitle} class:small={isLongTitle} itemprop="headline">
+     <slot/>
+</h1>
 
 <style lang="scss">
 

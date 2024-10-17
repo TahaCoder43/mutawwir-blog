@@ -50,7 +50,9 @@
 </script>
 
 <nav class={visibility} style={scrolledPercVar}>
-    <img src="/logo.png" alt="Logo for mutwawwir blog" id=logo />
+    <a href="/">
+        <img src="/logo.png" alt="Logo for mutwawwir blog" id=logo />
+    </a>
     <span id=page-links>
         <slot />
     </span>

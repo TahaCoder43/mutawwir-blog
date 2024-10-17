@@ -12,7 +12,10 @@ This blog should lead to my portfolio, so the about us page, will lead to anothe
 
 # Today TODO
 
-- [] fix the black fade in effect having it's own seperate area
+- [] add footer, look up designs, see SEO benefits, and how it benefits SEO (read main google doc about it). Take footer design inspirations, to make an aesthetic footer
+- [] I think at this time you might start filling in the hero page, headings, and paragraphs
+- [] After this perhaps start preparing the website for mobile
+- [] upload website ig
 
 Now start writing paragraphs, and improve seo (do keyword research, better alts, better file names, better headings, more data-titles, better article dividers (sections footers e.t.c fix that, and use it properly with good seo))
 
@@ -109,6 +112,37 @@ Checkout sketches you made in the copy
 section on home page, that shows all my cool projects I have undertaken. Or perhaps this should be in portfolio, or in both
 
 # SEO
+
+## TODO
+
+- [x] [Structuted Content](#Structured Content)
+- [x] [Blog Header](#Blog Header)
+- [x] [Article on Main blog page](#Blog Article)
+
+add a footer, that all other websites add with a lot of links, and learn how it works. It may also have to do something with those links that appear below the main link of your site
+
+### Blog header
+
+Create a header, with the h1, cutToTheCode button, and the first h2 iside it, (so the h2 will no longer be part of markdown)
+
+add a <time>, dificulty, and "read time" like tags, or badges after the first h2 (may also consider putting them with h1)
+
+Add a <date> (or whatever it was called) to mark the publishing date of each article on your blog, also add dificulty, and how much time will it take to read. Do this near the introduction
+
+### Blog Article
+
+On the main blog page `/blog` change the cards linking to blogs, to articles. they may also have other semantic issues like header e.t.c. Also rename that blog.svelte to blogcard
+
+### Structured Content
+
+As far as I see, not everything needs to be structured. For example hero page does not seem to need structuring. Following are the things that I may need to structure
+
+Article, BreadCrumb, FAQ, Image metadata (seems more than just alt), Organization (becareful with this one as it may have legal implications). Profile page (for hero page maybe)
+
+somehow tell google that the tags on your article are hashtags, keywords for the article
+
+
+## Bla Bla notes
 There are a lot of possible SEO improvements, 
 
 1. keyword research, and then using appropriate words in alts, headings, paragraphs e.t.c
@@ -127,20 +161,6 @@ Optimize media and add good alt texts
 Add distinct meta title and description tags to every page
 Use subdomains instead of subdirectories when it makes sense
 Backlinks, backlinks, backlinks
-
-## Implement these
-
-Make your content structuted using schema.org
-
-add a footer, that all other websites add with a lot of links, and learn how it works. It may also have to do something with those links that appear below the main link of your site
-
-### Implementing structured data
-
-As far as I see, not everything needs to be structured. For example hero page does not seem to need structuring. Following are the things that I may need to structure
-
-Article, BreadCrumb, FAQ, Image metadata (seems more than just alt), Organization (becareful with this one as it may have legal implications). Profile page (for hero page maybe)
-
-somehow tell google that the tags on your article are hashtags, keywords for the article
 
 ## Notes
 

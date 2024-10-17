@@ -30,7 +30,7 @@ onMount(() => {
 <svelte:document on:scroll={updateScrollPerc} />
 <div id=background-stick-limit style={scrollEffectLimitVar}>
     {#if hasImage}
-        <img src={img.path} alt={img.alt} id=background style={scrolledPercVar} />
+        <img itemprop="image" src={img.path} alt={img.alt} id=background style={scrolledPercVar} />
     {/if}
 </div>
 

@@ -6,10 +6,10 @@ export let reasons: string[];
 
 </script>
 
-<article id=info-bar class:visible={$infoBarStore.visible}>
+<aside id=info-bar class:visible={$infoBarStore.visible}>
     <h2>Reasons</h2>
     <p> {reasons[$infoBarStore.reasonToShowIndex]} </p>
-</article>
+</aside>
 
 <style lang="scss">
 

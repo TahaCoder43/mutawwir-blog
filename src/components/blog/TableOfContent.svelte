@@ -36,10 +36,11 @@ article {
 
     nav {
         padding: 20px 0 0 20px;
+
+
         opacity: 0;
-
-        transition: opacity 0;
-
+        visibility: hidden;
+        transition: none;
         counter-reset: links;
 
         a {
@@ -94,8 +95,8 @@ article {
 
 
         border-radius: 100%;
-        transition: right 0.3s, bottom 0.3s, background-color 0.3s 0.3s, box-shadow 0.3s 0.3s;
 
+        transition: right 0.3s, bottom 0.3s, background-color 0.3s, box-shadow 0.3s;
     }
 
     &:not(:has(input[type=checkbox]:checked)):hover {
@@ -107,10 +108,12 @@ article {
         right: 10px;
         background-color: hsl(270, 90%, 80%);
         box-shadow: 2px 3px 5px 2px #0005;
+        transition: right 0.3s, bottom 0.3s, background-color 0.3s 0.3s, box-shadow 0.3s 0.3s;
     }
 
     nav:has(~ input[type=checkbox]:checked) {
         opacity: 1;
+        visibility: visible;
 
         transition: opacity 0.5s 0.3s;
     }

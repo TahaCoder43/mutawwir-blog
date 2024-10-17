@@ -5,7 +5,7 @@ import type { CollectionEntry } from "astro:content";
 import BlogTitle from "../components/blog/BlogTitle.svelte";
 import BlogBackground from "../components/blog/BlogBackground.svelte";
 import InfoBar from "../components/blog/InfoBar.svelte";
-import BlogActions from "../components/blog/BlogActions.svelte";
+import CutToTheCode from "../components/blog/CutToTheCode.svelte";
 import TableOfContent from "../components/blog/TableOfContent.svelte";
 
 import "remark-github-alerts/styles/github-base.css";
@@ -16,7 +16,7 @@ interface Props {
 }
 
 const blog = Astro.props.blog;
-const { title, alterH1Title, description, img, reasons, practicalSectionId } = blog.data;
+const { title, alterH1Title, description, img, reasons, practicalSectionId, publishDate, dificulty } = blog.data;
 const { headings } = await blog.render();
 const backgroundScrollEffectLimit = 300;
 
@@ -28,15 +28,24 @@ const isLongTitle = title.length >= 50;
 ---
 
 <Layout {title} {description}>
-    <BlogBackground {img} scrollEffectLimit={backgroundScrollEffectLimit} client:load />
-    <article>
-        <BlogTitle {backgroundScrollEffectLimit} {isLongTitle} {isMediumTitle} client:load>
-            {hasAlterH1Title ? alterH1Title : title}
-        </BlogTitle>
-        {hasPracticalSectionId && <BlogActions {practicalSectionId} client:load />}
-        <section id="content">
+    <article itemscope itemtype="https://schema.org/BlogPosting">
+        <BlogBackground {img} scrollEffectLimit={backgroundScrollEffectLimit} client:load />
+        <header>
+            <BlogTitle {backgroundScrollEffectLimit} {isLongTitle} {isMediumTitle} client:load>
+                {hasAlterH1Title ? alterH1Title : title}
+            </BlogTitle>
+            {hasPracticalSectionId && <CutToTheCode {practicalSectionId} client:load />}
+            <div id="wrap-heading-info">
+                <h2 id="introductory">{headings[0].text}</h2>
+                <time datetime={publishDate.toISOString().split("T")[0] + "+05:00"} itemprop="datePublished">
+                    {publishDate.toLocaleString("en-GB", { dateStyle: "medium" })}
+                </time>
+                <p id="dificulty" class={dificulty.toLowerCase()}>{dificulty}</p>
+            </div>
+        </header>
+        <div id="content" itemprop="articleBody">
             <slot />
-        </section>
+        </div>
         {hasReasons && <InfoBar {reasons} client:load />}
         <TableOfContent {headings} />
     </article>
@@ -47,12 +56,63 @@ const isLongTitle = title.length >= 50;
         height: 4px;
     }
 
-    section#content {
+    header {
+        > div#wrap-heading-info {
+            display: flex;
+            align-items: center;
+            column-gap: 10px;
+
+            max-width: 800px;
+            margin-inline: auto;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+
+            > h2 {
+                color: var(--high-contrast);
+                font-family: Poppins, sans-serif;
+                font-size: 3rem;
+                font-weight: 700;
+                margin-right: 10px;
+            }
+
+            > time {
+                background-image: linear-gradient(to right, hsl(280, 80%, 80%), hsl(230, 80%, 80%));
+                padding: 5px 10px;
+                border-radius: 100px;
+            }
+
+            > #dificulty {
+                padding: 5px 10px;
+                border-radius: 100px;
+                color: white;
+
+                &.easy {
+                    background-color: #0f0b;
+                }
+
+                &.normal {
+                    background-color: #00fb;
+                }
+
+                &.hard {
+                    background-color: #f00b;
+                }
+            }
+        }
+    }
+
+    div#content {
         max-width: 800px;
         margin-inline: auto;
         font-size: 1.2rem;
 
         section {
+            &:first-child {
+                > h2 {
+                    display: none;
+                }
+            }
+
             > h2 {
                 color: var(--high-contrast);
                 font-family: Poppins, sans-serif;

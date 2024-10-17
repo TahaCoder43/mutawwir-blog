@@ -1,6 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import Blog from "../../components/blog/Blog.svelte";
+import BlogCard from "../../components/blog/BlogCard.svelte";
 import Topic from "../../components/blog/Topic.svelte";
 import { getCollection } from "astro:content";
 
@@ -14,17 +14,21 @@ const blogs = await getCollection("blog");
     <section id="fresh">
         <h1>Read Fresh Blogs</h1>
         <div class="blogs">
-            {blogs.map((blog) => <Blog blog={blog.data} name={blog.slug} />)}
+            <div class="scroller">
+                {blogs.map((blog) => <BlogCard blog={blog.data} name={blog.slug} />)}
+            </div>
         </div>
     </section>
     <section id="topics">
         <h1>Read Topic-wise</h1>
         <div class="blogs">
-            <Topic imgSrc="/blog/beutiful-code.png">Coding</Topic>
-            <Topic imgSrc="/arc/linux/sway-demonstration.png">Linux</Topic>
-            <Topic imgSrc="/blog/lots-of-dev-tools.png">Dev-tools</Topic>
-            <Topic imgSrc="/blog/infrastructure.png">Infrastruct-ure</Topic>
-            <Topic imgSrc="/arc/ide/dashboard-nvim.png">Code-Editors & IDEs</Topic>
+            <div class="scroller">
+                <Topic imgSrc="/blog/beutiful-code.png">Coding</Topic>
+                <Topic imgSrc="/arc/linux/sway-demonstration.png">Linux</Topic>
+                <Topic imgSrc="/blog/lots-of-dev-tools.png">Dev-tools</Topic>
+                <Topic imgSrc="/blog/infrastructure.png">Infrastruct-ure</Topic>
+                <Topic imgSrc="/arc/ide/dashboard-nvim.png">Code-Editors & IDEs</Topic>
+            </div>
         </div>
     </section>
 </Layout>
@@ -50,21 +54,25 @@ const blogs = await getCollection("blog");
         }
 
         .blogs {
-            display: flex;
-            justify-content: flex-start;
-            column-gap: 20px;
+            position: relative;
 
-            overflow-x: scroll;
-            width: 100%;
-            padding-bottom: 20px;
+            .scroller {
+                display: flex;
+                justify-content: flex-start;
+                column-gap: 20px;
+
+                overflow-x: scroll;
+                width: 100%;
+                padding-bottom: 20px;
+            }
 
             &::after {
                 content: "";
 
-                position: sticky;
+                position: absolute;
                 right: 0;
                 top: 0;
-                bottom: 0;
+                bottom: 22px;
 
                 width: 200px;
                 height: auto;

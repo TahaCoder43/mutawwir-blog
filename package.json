@@ -16,6 +16,7 @@
     "@astrojs/svelte": "^5.7.1",
     "astro": "^4.15.7",
     "prettier": "^3.3.3",
+    "rehype-mermaid": "^3.0.0",
     "remark-github-alerts": "^0.1.0-beta.3",
     "remark-sectionize": "^2.0.0",
     "sass": "^1.79.1",
@@ -24,11 +25,11 @@
   },
   "devDependencies": {
     "@iconify/svelte": "^4.0.2",
-    "prettier-plugin-svelte": "^3.2.6",
-    "prettier-plugin-astro": "^0.14.1",
-    "vitest": "^2.1.2",
     "@sveltejs/vite-plugin-svelte": "^3.1.2",
     "@testing-library/svelte": "^5.2.3",
-    "jsdom": "^25.0.1"
+    "jsdom": "^25.0.1",
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-svelte": "^3.2.6",
+    "vitest": "^2.1.2"
   }
 }

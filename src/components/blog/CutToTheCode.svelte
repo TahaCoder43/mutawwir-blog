@@ -5,8 +5,6 @@ export let practicalSectionId: string;
 
 let clicked = false;
 let scrolled = false
-$: opacity = scrolled ? 0 : 1
-$: opacityVar = `--opacity: ${opacity};`
 
 function handleMouseDown () {
     clicked = true
@@ -36,44 +34,42 @@ onMount(() => {
 
 
 <svelte:document on:scroll={handleScroll}/>
-<nav>
-    <a id=to-code class:clicked={clicked} on:mouseup={handleMouseUp} on:mousedown={handleMouseDown} style={opacityVar} href={"#" + practicalSectionId}>Cut to the code</a>
-</nav>
+<a 
+    id=to-code
+    class:clicked={clicked}
+    class:hidden={scrolled}
+    on:mouseup={handleMouseUp}
+    on:mousedown={handleMouseDown}
+    href={"#" + practicalSectionId}
+>Cut to the code</a>
 
 <style lang="scss">
-
-nav {
-    position: fixed;
-    bottom: 80px;
-    left: 0;
-    right: 0;
-
-    margin-inline: auto;
-    width: fit-content;
-
-    font-size: 2rem;
-    font-weight: bold;
-    word-spacing: -2px;
-    letter-spacing: -2px;
-
     a#to-code {
         display: inline-block;
-        position: relative;
+        position: fixed;
+        bottom: 80px;
+        left: 0;
+        right: 0;
 
+        width: fit-content;
         padding-block: 10px;
         padding-inline: 10px;
+        margin-inline: auto;
 
         background-image: url("/blog/linear-gradient.png");
         background-size: 400% 100%;
         background-position: 0% 0%;
 
+        font-size: 2rem;
+        font-weight: bold;
+        word-spacing: -2px;
+        letter-spacing: -2px;
         color: #222;
         text-decoration: none;
 
         border-radius: 100px;
         user-select: none;
-        opacity: var(--opacity) !important;
-        transition: color 0.3s, transform 0.2s, opacity 0.3s;
+        transition: color 0.3s, transform 0.2s, opacity 0.3s, visibility 0s;
         animation: gradient-move 15s infinite linear forwards;
 
         &::before {
@@ -109,8 +105,14 @@ nav {
         &.clicked {
             transform: scale(1.2, 0.8);
         }
-    }
 
+        &.hidden {
+            opacity: 0;
+            visibility: hidden;
+
+            transition: opacity 0.3s, visibility 0s linear 0.3s;
+        }
+    }
 
     @keyframes gradient-move {
         from {
@@ -120,6 +122,5 @@ nav {
             background-position: 600% 0%;
         }
     }
-}
 
 </style>
