@@ -1,6 +1,7 @@
 ---
 import Navbar from "../components/Navbar.svelte";
 import GradientLink from "../components/GradientLink.svelte";
+import Footer from "../components/Footer.svelte"
 interface Props {
     title: string;
     description: string;
@@ -27,6 +28,7 @@ const { title, description } = Astro.props;
             <GradientLink client:load href="/contact/">Contact me</GradientLink>
         </Navbar>
         <slot />
+        <Footer/>
     </body>
 </html>
 

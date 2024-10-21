@@ -45,7 +45,6 @@
     onMount(() => {
         document.addEventListener("scroll",  handleScroll)
     })
-    
 
 </script>
 
