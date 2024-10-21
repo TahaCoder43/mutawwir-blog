@@ -7,6 +7,7 @@ import BlogBackground from "../components/blog/BlogBackground.svelte";
 import InfoBar from "../components/blog/InfoBar.svelte";
 import CutToTheCode from "../components/blog/CutToTheCode.svelte";
 import TableOfContent from "../components/blog/TableOfContent.svelte";
+import Author from "../components/blog/Author.svelte";
 
 import "remark-github-alerts/styles/github-base.css";
 import "remark-github-alerts/styles/github-colors-light.css";
@@ -48,6 +49,7 @@ const isLongTitle = title.length >= 50;
         </div>
         {hasReasons && <InfoBar {reasons} client:load />}
         <TableOfContent {headings} />
+        <Author />
     </article>
 </Layout>
 
@@ -56,114 +58,117 @@ const isLongTitle = title.length >= 50;
         height: 4px;
     }
 
-    header {
-        > div#wrap-heading-info {
-            display: flex;
-            align-items: center;
-            column-gap: 10px;
+    body > article {
+        margin-bottom: 100px;
+        --max-width: 800px;
+    }
 
-            max-width: 800px;
-            margin-inline: auto;
-            margin-bottom: 10px;
-            font-size: 1.2rem;
+    header > div#wrap-heading-info {
+        display: flex;
+        align-items: center;
+        column-gap: 10px;
 
-            > h2 {
-                color: var(--high-contrast);
-                font-family: Poppins, sans-serif;
-                font-size: 3rem;
-                font-weight: 700;
-                margin-right: 10px;
+        max-width: var(--max-width);
+        margin-inline: auto;
+        margin-bottom: 10px;
+        font-size: 1.2rem;
+
+        > h2 {
+            color: var(--high-contrast);
+            font-family: Poppins, sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin: 0 10px 0 0;
+        }
+
+        > time {
+            background-image: linear-gradient(to right, hsl(280, 80%, 80%), hsl(230, 80%, 80%));
+            padding: 5px 10px;
+            border-radius: 100px;
+        }
+
+        > #dificulty {
+            padding: 5px 10px;
+            border-radius: 100px;
+            color: white;
+
+            &.easy {
+                background-color: #0f0b;
             }
 
-            > time {
-                background-image: linear-gradient(to right, hsl(280, 80%, 80%), hsl(230, 80%, 80%));
-                padding: 5px 10px;
-                border-radius: 100px;
+            &.normal {
+                background-color: #00fb;
             }
 
-            > #dificulty {
-                padding: 5px 10px;
-                border-radius: 100px;
-                color: white;
-
-                &.easy {
-                    background-color: #0f0b;
-                }
-
-                &.normal {
-                    background-color: #00fb;
-                }
-
-                &.hard {
-                    background-color: #f00b;
-                }
+            &.hard {
+                background-color: #f00b;
             }
         }
     }
 
     div#content {
-        max-width: 800px;
+        max-width: var(--max-width);
         margin-inline: auto;
         font-size: 1.2rem;
+    }
 
-        section {
-            &:first-child {
-                > h2 {
-                    display: none;
-                }
-            }
-
+    div#content section {
+        &:first-child {
             > h2 {
-                color: var(--high-contrast);
-                font-family: Poppins, sans-serif;
-                font-size: 3rem;
-                font-weight: 700;
-                margin-bottom: 10px;
+                display: none;
             }
+        }
 
-            > p,
-            > div.markdown-alert > p:not(.markdown-alert-title),
-            > ul > li,
-            > ol > li {
-                color: var(--medium-contrast);
-                > code {
-                    background-color: hsl(270, 100%, 85%);
-                    border-radius: 10px;
-                    padding-inline: 5px;
-                    font-size: 1rem;
-                }
-            }
+        > h2 {
+            color: var(--high-contrast);
+            font-family: Poppins, sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
 
-            > pre {
-                padding: 10px;
-                border-radius: 5px;
-                font-size: 0.9rem;
-                box-shadow: 2px 3px 8px 2px #0008;
-            }
-
-            div.markdown-alert {
-                padding-block: 20px;
+        > p,
+        > div.markdown-alert > p:not(.markdown-alert-title),
+        > ul > li,
+        > ol > li {
+            color: var(--medium-contrast);
+            > code {
+                background-color: hsl(270, 100%, 85%);
                 border-radius: 10px;
+                padding-inline: 5px;
+                font-size: 1rem;
+            }
+        }
 
-                &.markdown-alert-note {
-                    background-color: #0969da33;
-                }
+        > pre {
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            box-shadow: 2px 3px 8px 2px #0008;
+        }
 
-                &.markdown-alert-important {
-                    background-color: #8250df33;
-                }
+        div.markdown-alert {
+            padding-block: 20px;
+            border-radius: 10px;
 
-                &.markdown-alert-tip {
-                    background-color: #1a7f3733;
-                }
+            &.markdown-alert-note {
+                background-color: #0969da33;
+            }
 
-                &.markdown-alert-warning {
-                    background-color: #9a670033;
-                }
+            &.markdown-alert-important {
+                background-color: #8250df33;
+            }
 
-                &.markdown-alert-caution {
-                    background-color: #d1242f33;
-                }
+            &.markdown-alert-tip {
+                background-color: #1a7f3733;
+            }
+
+            &.markdown-alert-warning {
+                background-color: #9a670033;
+            }
+
+            &.markdown-alert-caution {
+                background-color: #d1242f33;
             }
         }
     }
