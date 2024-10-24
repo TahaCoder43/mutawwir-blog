@@ -12,7 +12,8 @@ This blog should lead to my portfolio, so the about us page, will lead to anothe
 
 # Today TODO
 
-- [] add footer, look up designs, see SEO benefits, and how it benefits SEO (read main google doc about it). Take footer design inspirations, to make an aesthetic footer
+- [x] add footer, 
+- [] footer: upgrade: look up designs, see SEO benefits, and how it benefits SEO (read main google doc about it). Take footer design inspirations, to make an aesthetic footer
 - [] I think at this time you might start filling in the hero page, headings, and paragraphs
 - [] After this perhaps start preparing the website for mobile
 - [] upload website ig
@@ -22,13 +23,13 @@ Now start writing paragraphs, and improve seo (do keyword research, better alts,
 
 # TODO
 - [] [SEO](#SEO)
-- [] [Footer](#Footer)
 - [] [Related Blogs](#Related Blogs) (do this one after you have written some blogs)
 - [] [Blogs Reimagined](#Blogs Reimagined)
 - [] [Testing](#Testing)
 - [] [Highlight Stroke](#Highlight Strke)
 - [] [Article Steps](#Article Steps)
 - [] [Showcase section](#Showcase section) 
+- [x] [Footer](#Footer)
 - [x] [Table of Content](#Table of Content)
 - [x] [Article Sidebar](#Article Sidebar)
 - [x] [Blogs](#BLogs)

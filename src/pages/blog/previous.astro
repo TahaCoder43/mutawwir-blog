@@ -1,0 +1,90 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import BlogCard from "../../components/blog/BlogCard.svelte";
+import Topic from "../../components/blog/Topic.svelte";
+import { getCollection } from "astro:content";
+
+const blogs = await getCollection("blog");
+---
+
+<Layout
+    title="Blogs"
+    description="Read blogs on various tech topics such as Coding, Linux, Dev-tools, IDE's & Code-editors, Graphic Design, Code Infrastructure and more!"
+>
+    <section id="fresh">
+        <h1>Read Fresh Blogs</h1>
+        <div class="blogs">
+            <div class="scroller">
+                {blogs.map((blog) => <BlogCard blog={blog.data} name={blog.slug} />)}
+            </div>
+        </div>
+    </section>
+    <section id="topics">
+        <h1>Read Topic-wise</h1>
+        <div class="blogs">
+            <div class="scroller">
+                <Topic imgSrc="/blog/beutiful-code.png">Coding</Topic>
+                <Topic imgSrc="/arc/linux/sway-demonstration.png">Linux</Topic>
+                <Topic imgSrc="/blog/lots-of-dev-tools.png">Dev-tools</Topic>
+                <Topic imgSrc="/blog/infrastructure.png">Infrastruct-ure</Topic>
+                <Topic imgSrc="/arc/ide/dashboard-nvim.png">Code-Editors & IDEs</Topic>
+            </div>
+        </div>
+    </section>
+</Layout>
+
+<style lang="scss">
+    *::-webkit-scrollbar {
+        height: 3px;
+    }
+
+    *::-webkit-scrollbar-thumb {
+        background-image: none;
+        background-color: #aaa;
+    }
+
+    section {
+        padding-left: 50px;
+
+        h1,
+        h2 {
+            font-family: var(--heading-font);
+            font-size: 2rem;
+            color: var(--high-contrast);
+        }
+
+        .blogs {
+            position: relative;
+
+            .scroller {
+                display: flex;
+                justify-content: flex-start;
+                column-gap: 20px;
+
+                overflow-x: scroll;
+                width: 100%;
+                padding-bottom: 20px;
+            }
+
+            &::after {
+                content: "";
+
+                position: absolute;
+                right: 0;
+                top: 0;
+                bottom: 22px;
+
+                width: 200px;
+                height: auto;
+                flex-shrink: 0;
+
+                z-index: 2;
+                background-image: linear-gradient(to right, #0000, #000a);
+            }
+        }
+
+        &#topics {
+            padding-bottom: 100px;
+        }
+    }
+</style>

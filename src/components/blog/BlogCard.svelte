@@ -1,6 +1,6 @@
 <script lang="ts">
 
-import {type CollectionEntry } from "astro:content"
+import type { CollectionEntry } from "astro:content"
 
 export let blog: CollectionEntry<'blog'>["data"];
 export let name: CollectionEntry<"blog">["slug"]
