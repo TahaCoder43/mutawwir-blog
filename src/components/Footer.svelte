@@ -14,10 +14,10 @@
         </span>
         <span>
             <h2>Blogs</h2>
-            <a>Coding</a>
-            <a>Linux</a>
-            <a>Infrastructure</a>
-            <a>Dev-Tools & IDE</a>
+            <a href="/blog#coding">Coding</a>
+            <a href="/blog#linux">Linux</a>
+            <a href="/blog#dev-tools">Dev-Tools</a>
+            <a href="/blog#ide">IDE & Code-editors </a>
         </span>
     </nav>
     <section>
@@ -44,20 +44,47 @@
 footer {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    column-gap: 50px;
+    column-gap: 2.5em;
 
-    height: 300px;
-    width: 100%;
+    height: 15.5em;
+    max-width: 100%;
     background-color: hsl(270, 100%, 90%);
+
+    font-size: 1.2rem;
+
+    @media (max-width: 800px) {
+        font-size: 1rem;
+    }
+
+    @media (max-width: 700px) {
+        column-gap: 1em;
+    }
+
+    @media (max-width: 650px) {
+        column-gap: 0em;
+    }
+
+    @media (max-width: 600px) {
+        grid-template-columns: fit-content(100%);
+        grid-template-rows: 1fr 1fr;
+        align-items: center;
+        justify-content: center;
+
+        height: 420px;
+        padding-inline: 20px;
+    }
 
     nav {
         display: flex;
         justify-self: right;
-        align-items: top;
 
-        width: 400px;
+        width: min(400px, 90%);
         height: 100%;
         padding-top: 30px;
+
+        @media (max-width: 600px) {
+            justify-self: left;
+        }
 
         span {
             display: inline-block;
@@ -67,14 +94,14 @@ footer {
             h2 {
                 margin-block: 0 0.5em;
 
-                font-size: 2.5rem;
+                font-size: 2em;
                 color: var(--high-contrast);
             }
             a {
                 display: block;
 
                 color: var(--medium-contrast);
-                font-size: 1.2rem;
+                font-size: 1em;
                 text-decoration: none;
             }
             
@@ -84,35 +111,35 @@ footer {
     section {
         display: grid;
         grid-template: 
-            "logo    email       " 50px
+            "logo    email       " calc(3em + (30px - 2vw))
             "logo    phone-number" max-content
-            "socials socials     " 1fr
-            / max-content max-content;
+            ".       .           " 1fr
+            "socials socials     " max-content
+            ".       .           " 1fr
+            / max-content fit-content(400px);
         column-gap: 20px;
+        min-width: 0;
+        max-width: 100%;
+        height: 100%;
 
         padding-top: 30px;
+
+        @media (max-width: 600px) {
+            padding-top: 0;
+        }
 
         #logo {
             grid-area: logo;
 
-            width: 8rem;
-            height: 8rem;
+            width: 7em;
+            height: 7em;
 
             border-radius: 10px;
             border: 2px solid #0005;
         }
 
-        h2 {
-            grid-area: company-name;
-            margin: 10px 0 0 0;
-
-            color: var(--high-contrast);
-            font-family: var(--heading-font);
-            font-size: 2rem;
-        }
-
         p {
-            font-size: 1.2rem;
+            font-size: 1em;
             color: var(--medium-contrast);
             height: fit-content;
             margin: 0;
@@ -134,12 +161,11 @@ footer {
 
             height: fit-content;
             width: 100%;
-            padding-block: 30px;
 
             a {
                 display: inline-block;
-                height: 3rem;
-                width: 3rem;
+                height: 2.5em;
+                width: 2.5em;
 
                 img {
                     width: 100%;

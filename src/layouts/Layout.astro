@@ -1,7 +1,7 @@
 ---
 import Navbar from "../components/Navbar.svelte";
 import GradientLink from "../components/GradientLink.svelte";
-import Footer from "../components/Footer.svelte"
+import Footer from "../components/Footer.svelte";
 interface Props {
     title: string;
     description: string;
@@ -15,20 +15,20 @@ const { title, description } = Astro.props;
     <head>
         <meta charset="UTF-8" />
         <meta name="description" content={description} />
-        <meta name="viewport" content="width=device-width" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/png" href="/favicon.png" />
         <meta name="generator" content={Astro.generator} />
         <title>{title}</title>
     </head>
     <body>
         <Navbar client:load>
-            <GradientLink client:load href="/">Home</GradientLink>
-            <GradientLink client:load href="/blog/">Blog</GradientLink>
-            <GradientLink client:load href="<about-me">About me</GradientLink>
-            <GradientLink client:load href="/contact/">Contact me</GradientLink>
+            <GradientLink href="/">Home</GradientLink>
+            <GradientLink href="/blog/">Blog</GradientLink>
+            <GradientLink href="<about-me">About me</GradientLink>
+            <GradientLink href="/contact/">Contact me</GradientLink>
         </Navbar>
         <slot />
-        <Footer/>
+        <Footer />
     </body>
 </html>
 
@@ -137,7 +137,6 @@ const { title, description } = Astro.props;
         background-color: var(--color-background);
         padding: 0;
         margin: 0;
-        overflow-x: hidden;
         height: fit-content;
     }
 

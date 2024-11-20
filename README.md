@@ -24,11 +24,12 @@ Now start writing paragraphs, and improve seo (do keyword research, better alts,
 # TODO
 - [] [SEO](#SEO)
 - [] [Related Blogs](#Related Blogs) (do this one after you have written some blogs)
-- [] [Blogs Reimagined](#Blogs Reimagined)
 - [] [Testing](#Testing)
 - [] [Highlight Stroke](#Highlight Strke)
 - [] [Article Steps](#Article Steps)
 - [] [Showcase section](#Showcase section) 
+- [] Replace IDE & Code-Editors with Vector Design
+- [x] [Blogs Reimagined](#Blogs Reimagined)
 - [x] [Footer](#Footer)
 - [x] [Table of Content](#Table of Content)
 - [x] [Article Sidebar](#Article Sidebar)

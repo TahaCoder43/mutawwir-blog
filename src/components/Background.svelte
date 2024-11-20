@@ -42,7 +42,7 @@ onMount(() => {
             left: calc(var(--width-decrease) / 2);
             top: calc(var(--height-decrease) / 2);
 
-            width: calc(100vw - var(--width-decrease));
+            width: calc(100% - var(--width-decrease));
             height: calc(100vh - var(--height-decrease));
             object-fit: cover;
 
@@ -51,7 +51,7 @@ onMount(() => {
             box-shadow: 3px 5px 10px 2px #0005;
 
             --max-border-radius-increase: 20px;
-            --max-width-decrease: 20vw;
+            --max-width-decrease: 20%;
             --max-height-decrease: 20vh;
             --max-brightness-increase: 40%;
 

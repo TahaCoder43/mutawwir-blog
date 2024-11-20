@@ -1,16 +1,19 @@
 <script lang="ts">
-import Roll from "./arc/Roll.svelte";
-import Arc from "./arc/Arc.svelte";
-import BouncyButton from "./arc/BouncyButton.svelte";
-import Coding from "./arc/Coding.svelte";
-import ThreeStack from "./arc/ThreeStack.svelte";
+import Roll from "./BlogsInfo/Roll.svelte";
+import Arc from "./BlogsInfo/arc/Arc.svelte";
+import InfoOnBLogs from "./BlogsInfo/InfoOnBlogs.svelte"
+import ImagesBlogInfo from "./BlogsInfo/ImagesBlogInfo.svelte"
+import FadeBlogsInfo from "./BlogsInfo/FadeBlogsInfo.svelte"
+
 import { onMount } from "svelte";
+import useIsMobile from "../lib/useIsMobile";
 
 export let scrollEffectLimit: number;
 let thisBlogsInfo: HTMLElement;
 let stickyLimitTop: number;
 let currentPresentationIndex: number = 0;
 let scrolledPerc: number;
+let isMobile = useIsMobile();
 
 class NoParentError extends Error {
     constructor(msg: string) {
@@ -58,81 +61,16 @@ onMount(() => {
 </script>
 
 <section id="blogs-info" bind:this={thisBlogsInfo}>
-    <div class={["fade", "top"].join(" ")}></div>
-    <div class={["fade", "bottom"].join(" ")}></div>
+    {#if !$isMobile}
+        <FadeBlogsInfo/>
+    {/if}
     <Roll {currentPresentationIndex} >
-        <section id=introduction>
-            <h2>Introduction</h2>
-            <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus non atque esse iure nisi adipisci
-                quod quasi explicabo vero quibusdam, harum beatae iste alias, aliquam ullam laborum praesentium!
-                Excepturi, officia. Include here what mutawwir means in arabic, and what hte blog is about
-            </p>
-            <BouncyButton title="Go to blogs overview"> Overview </BouncyButton>
-        </section>
-        <section id=coding>
-            <h2>Coding</h2>
-            <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus non atque esse iure nisi adipisci
-                quod quasi explicabo vero quibusdam, harum beatae iste alias, aliquam ullam laborum praesentium!
-                Excepturi, officia.
-            </p>
-            <BouncyButton title="Go to coding blogs">Learn</BouncyButton>
-        </section>
-        <section id=linux>
-            <h2>Linux</h2>
-            <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus non atque esse iure nisi adipisci
-                quod quasi explicabo vero quibusdam, harum beatae iste alias, aliquam ullam laborum praesentium!
-                Excepturi, officia.
-            </p>
-            <BouncyButton title="Go to linux blogs">Read</BouncyButton>
-        </section>
-        <section id=dev-tools>
-            <h2>Dev-tools</h2>
-            <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus non atque esse iure nisi adipisci
-                quod quasi explicabo vero quibusdam, harum beatae iste alias, aliquam ullam laborum praesentium!
-                Excepturi, officia.
-            </p>
-            <BouncyButton title="Go to dev-tools blogs">Find out</BouncyButton>
-        </section>
-        <section id=ide>
-            <h2>IDE & Code-Editors</h2>
-            <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus non atque esse iure nisi adipisci
-                quod quasi explicabo vero quibusdam, harum beatae iste alias, aliquam ullam laborum praesentium!
-                Excepturi, officia.
-            </p>
-            <BouncyButton title="Go to IDE blogs">Check out</BouncyButton>
-        </section>
+        <InfoOnBLogs/>
     </Roll>
     <Arc {currentPresentationIndex} />
     <div class="spacing"/>
     <Roll {currentPresentationIndex}>
-        <div class="image-container">
-            <img src="/arc/introduction.svg" alt="Computer screen with blog posts"/>
-        </div>
-        <div class="image-container">
-            <Coding/>
-        </div>
-        <div class="image-container">
-            <ThreeStack>
-                <img src="/arc/linux/tmux-with-btop-gitui-lf.png" class=window alt="tmux with btop, gitui, lf"/>
-                <img src="/arc/linux/inkscape-code-logo.png" class=window alt="inkscape on alpine and sway"/>
-                <img src="/arc/linux/sway-demonstration.png" class=window alt="research and code"/>
-            </ThreeStack>
-        </div>
-        <div class="image-container">
-            <img src="/arc/dev-tools.png" alt="Illustration of docker linking to python backend, javascript frontend and postgres database with there respective tools"/>
-        </div>
-        <div class="image-container">
-            <ThreeStack>
-                <img src="/arc/ide/dashboard-nvim.png" class=window alt="Neovim startup dashboard, using dasboard.nvim"/>
-                <img src="/arc/ide/nvim-nvchad.png" class=window alt="Beutiful neovim coding setup"/>
-                <img src="/arc/ide/nvim-git.png" class=window alt="Power of gitui, all inside neovim"/>
-            </ThreeStack>
-        </div>
+        <ImagesBlogInfo/>
     </Roll>
 </section>
 
@@ -147,91 +85,67 @@ onMount(() => {
             radial-gradient(circle at 35% 40%, hsla(200, 80%, 60%, 0.4), transparent 400px),
             radial-gradient(circle at 35% 40%, hsla(200, 80%, 60%, 0.4), transparent 400px),
             ;
+        
+        @media (max-width: 800px) {
+            flex-direction: column;
+            background-image: none;
+        }
+
+        :global(.content-roll:nth-of-type(1)) {
+            flex-shrink: 1;
+
+            @media (max-width: 1100px) {
+                flex-shrink: 3;
+            }
+        }
 
         .spacing {
             flex-shrink: 2;
-            width: 100%
-        }
+            width: 100%;
 
-        section {
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-
-            padding-inline: 50px 20px;
-
-            h2 {
-                font-size: 5.5rem;
-                font-family: var(--heading-font);
-                font-weight: 700;
-                text-transform: uppercase;
-                color: var(--high-contrast);
-                letter-spacing: -2px;
-                line-height: 1.3em;
-
-                margin-block: 0 
+            @media (max-width: 1100px) {
+                flex-shrink: 5;
             }
 
-            p {
-                font-size: 1.5rem;
-                color: var(--medium-contrast);
+            @media (max-width: 800px) {
+                height: 100%;
+                flex-shrink: 4;
+            }
+
+            @media (max-width: 500px) {
+                flex-shrink: 5;
             }
         }
 
-        :global(> section:nth-last-child(1)) {
+        :global(> section.content-roll:nth-last-child(1)) {
             position: absolute;
             right: 0;
             top: 0;
-            width: 400px;
-            padding-left: 50px;
+            width: 30vw;
+            padding-left: 4vw;
             height: 100%;
             background-color: transparent;
-        }
 
-        .image-container {
-            display: flex;
-            align-items: center;
-            overflow: visible;
-
-            img {
-                height: 50%;
+            @media (max-width: 1100px) {
+                width: 35vw;
             }
 
-            &:nth-child(4) {
-                img {
-                    position: relative;
-                    left: -30px;
-                    height: 55%;
-                }
-            }
-
-            &:nth-child(5) {
-                img {
-                    height: auto;
-                    width: 90%;
-                }
-            }
-        }
-
-        .fade {
-            position: absolute;
-            left: 0;
-
-            width: 100%;
-            height: 100px;
-            z-index: 100;
-
-            background-image: linear-gradient(var(--direction), transparent, var(--color-background) 80%);
-
-            &.top {
-                top: 0;
-                --direction: to top;
-            }
-
-            &.bottom {
+            @media (max-width: 800px) {
                 bottom: 0;
-                --direction: to bottom;
+                left: 0;
+                top: auto;
+                right: auto;
+
+                height: 45vh;
+                width: 100%;
+                padding-left: 0;
             }
+
+            @media (max-width: 500px) {
+                height: 35vh;
+            }
+
         }
+
     }
 </style>

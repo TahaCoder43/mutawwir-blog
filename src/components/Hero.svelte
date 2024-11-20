@@ -17,6 +17,7 @@
 <style lang="scss">
     #hero {
         height: calc(100vh - var(--navbar-height));
+        overflow: hidden;
 
         #content {
             position: relative;
@@ -26,20 +27,33 @@
             justify-content: center;
 
             text-align: center;
-            width: min-content;
             height: calc(100vh - var(--navbar-height));
             margin-inline: auto;
             padding-bottom: 200px;
+            font-size: 1rem;
+
+            @media (max-width: 600px) {
+                font-size: 0.9rem;
+            }
+
+            @media (max-width: 450px) {
+                font-size: 0.8rem;
+            }
+            
+            @media (max-width: 340px) {
+                font-size: 0.7rem;
+            }
 
             h1 {
                 position: relative;
 
-                width: max-content;
+                width: min(750px, 90vw);
                 margin-top: 80px;
                 margin-bottom: 20px;
+                margin-inline: auto;
 
                 font-family: var(--heading-font);
-                font-size: 4rem;
+                font-size: 4em;
                 color: var(--hero-high-contrast);
                 text-transform: uppercase;
 
@@ -47,7 +61,7 @@
                     color: var(--accent-color);
                 }
 
-                #darken {
+                #darken { // this is causing the overflowing issues
                     position: absolute;
                     left: -10%;
                     top: -20px;
@@ -56,18 +70,16 @@
                     background-color: #000d;
                     border-radius: 25%;
                     filter: blur(150px);
-                    /* backdrop-filter: blur(10px); */
-                    /* background-color: #0005; */
-                    /* box-shadow: 2px 5px 20px 2px #000e; */
                     z-index: -1;
                 }
             }
 
             p {
-                font-size: 1.5rem;
+                font-size: 1.5em;
                 color: var(--hero-low-contrast);
                 justify-self: center;
-                width: 100%;
+                width: min(750px, 90vw);
+                margin-inline: auto;
             }
 
             #action-menu {
@@ -75,7 +87,7 @@
                 a {
                     display: inline-block;
 
-                    font-size: 1.8rem;
+                    font-size: 1.8em;
                     font-weight: 700;
                     text-decoration: none;
 

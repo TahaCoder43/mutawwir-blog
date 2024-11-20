@@ -25,10 +25,11 @@ const circles = ["python", "javascript", "rust", "kotlin", "html", "css", "go", 
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         grid-template-rows: repeat(4, 1fr);
-        gap: 15px;
+        gap: 5%;
         
-        height: 400px;
-        min-width: 400px;
+        height: min(400px, 80vw);
+        min-width: min(400px, 80vw);
+        width: min(400px, 80vw);
         padding: 15px;
 
         .circle {
@@ -59,7 +60,17 @@ const circles = ["python", "javascript", "rust", "kotlin", "html", "css", "go", 
         height: 100%;
         width: 100px;
 
-        background-image: linear-gradient(to right, transparent, #f0f0f0aa)
+        background-image: linear-gradient(to right, transparent, #f0f0f0aa);
+
+        @media (max-width: 800px) {
+            right: auto;
+            bottom: 0;
+
+            width: 100%;
+            height: 150px;
+
+            background-image: linear-gradient(to bottom, transparent, #f0f0f0aa);
+        }
     }
 
 </style>

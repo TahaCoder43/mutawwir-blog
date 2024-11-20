@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import BouncyButton from "./arc/BouncyButton.svelte";
+    import BouncyButton from "./BlogsInfo/BouncyButton.svelte";
 
     let thisLinkProfessions: HTMLElement;
 
@@ -45,13 +45,14 @@
     #link-professions {
         display: grid;
         grid-template-columns: 300px max-content 300px max-content 300px;
-        column-gap: var(--gap);
+        gap: var(--gap);
         align-items: center;
 
         height: 100vh;
         max-width: 1400px; // try to increase this by increasing height ig
         margin-inline: auto;
         padding-inline: var(--gap);
+        overflow: hidden;
 
         --gap: calc((100vw - 900px) / 6);
 
@@ -59,11 +60,41 @@
             grid-template-columns: 1fr max-content 1fr max-content 1fr;
             --gap: 50px;
         }
+
+        @media (max-width: 800px) {
+            grid-template-columns: min(400px, 85vw);
+            grid-template-rows: repeat(5, max-content);
+            justify-content: center;
+
+            height: fit-content;
+            padding-block: 50px;
+        }
     }
 
     section {
         position: relative;
         right: 0;
+        font-size: 1rem;
+
+        @media (max-width: 1000px) {
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 900px) {
+            font-size: 0.75rem;
+        }
+
+        @media (max-width: 800px) {
+            font-size: 1rem;
+        }
+
+        @media (max-width: 400px) {
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 300px) {
+            font-size: 0.8rem;
+        }
 
         &:nth-child(1) {
             transition: right 0.3s cubic-bezier(.22,.61,.36,1);
@@ -83,7 +114,8 @@
 
         img, video {
             width: 100%;
-            height: 200px;
+            height: auto;
+            aspect-ratio: 16 / 11;
 
             border-radius: 10px;
             box-shadow: 3px 5px 10px 2px #0005;
@@ -100,20 +132,28 @@
         h2 {
             color: var(--high-contrast);
             font-family: var(--heading-font);
-            font-size: 3rem;
+            font-size: 3em;
 
             margin-block: 10px 5px;
+
+            @media (max-width: 900px) {
+                font-size: 2.5em;
+            }
+
+            @media (max-width: 800px) {
+                font-size: 3em;
+            }
         }
 
         p {
             color: var(--medium-contrast);
 
             width: 90%;
-            margin-block: 0;
+            margin-block: 0 10px;
         }
 
         :global(a) {
-            --font-size: 1.5rem;
+            --font-size: 1.5em;
             float: right;
         }
 
@@ -134,8 +174,27 @@
     #seperator {
         width: 1px;
         height: 500px;
-        background-image: linear-gradient(to bottom, transparent, var(--background-color) 50px, var(--background-color) 450px, transparent);
+        background-image: linear-gradient(to bottom, transparent, var(--background-color) 10%, var(--background-color) 90%, transparent);
 
-        --background-color: #555
+        --background-color: #555;
+
+        @media (max-width: 1000px) {
+            height: 400px;
+        }
+
+        @media (max-width: 900px) {
+            height: 320px;
+        }
+
+        @media (max-width: 800px) {
+            position: relative;
+            right: 5%;
+
+            height: 1px;
+            width: 110%;
+
+            background-image: linear-gradient(to right, transparent, var(--background-color) 10%, var(--background-color) 90%, transparent);
+
+        }
     }
 </style>

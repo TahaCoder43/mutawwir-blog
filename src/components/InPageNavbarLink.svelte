@@ -98,7 +98,7 @@ function prepareHandleClick(link: HTMLAnchorElement) {
 
 <style lang="scss">
     a {
-        font-size: 1.2rem;
+        font-size: 1.01rem;
         font-weight: bold;
         color: rgba(var(--light), var(--light), var(--light), 0.6);
         text-decoration: none;

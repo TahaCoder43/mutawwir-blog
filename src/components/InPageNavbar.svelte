@@ -2,9 +2,6 @@
 import { onMount, setContext } from "svelte";
 import InPageNavbarLink from "./InPageNavbarLink.svelte";
 
-
-import { fly } from "svelte/transition";
-
 export let bgVideoStickLimit: number;
 export let blogsInfoStickLimit: number;
 let innerHeight: number;
@@ -72,14 +69,13 @@ nav {
     bottom: 20px;
     z-index: 999;
 
-    max-width: 800px;
+    max-width: min(800px, 90vw);
     height: 60px;
     margin-inline: auto;
 
     background-color: rgba(var(--light), var(--light), var(--light), 0.1);
     border-radius: 30px;
     box-shadow: 0px 5px 5px 2px rgba(0, 0, 0, var(--box-shadow-opacity));
-    overflow: hidden;
     backdrop-filter: blur(30px) saturate(1.5);
     transition: max-width 0.3s, visibility 0s;
 

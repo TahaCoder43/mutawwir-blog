@@ -2,6 +2,7 @@
     import { onMount } from "svelte";
     import Instagram from "./svgs/socials/Instagram.svelte";
     import Linkedin from "./svgs/socials/Linkedin.svelte"
+    import Menu from "./Menu.svelte"
 
     let visibility = "shown";
     let scrolledPerc= 0;
@@ -56,25 +57,29 @@
         <slot />
     </span>
     <span id=socials>
-        <a id=instagram data-title="Go to my instagram">
+        <a id=instagram title="Go to my instagram">
             <Instagram />
         </a>
-        <a id=linkedin data-title="Go to my linkedin">
+        <a id=linkedin title="Go to my linkedin">
             <Linkedin />
         </a>
     </span>
+    <Menu />
 </nav>
 
 <style lang="scss">
     nav {
-        position: sticky;
-        top: 0;
-        z-index: 999;
         display: flex;
         justify-content: space-between;
         align-items: center;
+
+        position: sticky;
+        top: 0;
+        z-index: 999;
+
         height: var(--navbar-height);
         padding-inline: 20px;
+
         backdrop-filter: blur(30px) saturate(1.3);
         background-color: rgba(0, 0, 0, var(--opacity));
         box-shadow: 0 2px 20px 4px rgba(0, 0, 0, var(--box-shadow-opacity));
@@ -87,19 +92,27 @@
             top: calc(var(--navbar-height) * -1.2) !important;
         }
 
-        #logo {
+        img#logo {
             height: 4rem;
             border-radius: 10px;
         }
 
-        #page-links {
+        span#page-links {
             display: flex;
             column-gap: 20px;
+
+            @media (max-width: 700px) {
+                display: none;
+            }
         }
 
-        #socials {
+        span#socials {
             display: flex;
             column-gap: 10px;
+
+            @media (max-width: 700px) {
+                display: none;
+            }
 
             a {
                 position: relative;
@@ -132,8 +145,9 @@
                     }
                 }
             }
-
-            
         }
+
+
+
     }
 </style>

@@ -42,7 +42,7 @@ function handleClick() {
 
         --color: var(--hero-high-contrast);
         --background-color: var(--accent-color);
-        --font-size: 2rem;
+        --font-size: 2em;
 
         &.clicked {
             transform: scale(0.98, 1.02);
