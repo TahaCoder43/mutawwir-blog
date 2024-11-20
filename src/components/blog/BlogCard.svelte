@@ -8,30 +8,31 @@ export let name: CollectionEntry<"blog">["slug"]
 </script>
 
 <article class="blog">
-    {#if blog.img !== undefined}
-        <img src={blog.img.path} alt={blog.img.alt} />
-    {:else}
-        <p>Show default blog background image here `^`</p>
-    {/if}
-    <a href={`/blog/${name}`} title={`Read ${blog.title}`}>Read</a>
-    <div class="fade-content">
-        <h2 class="title">{blog.title}</h2>
-        <p class="description">
-            {blog.description}
-        </p>
-        <footer>
-            <span class="tags">
-                {#each blog.tags as tag}
-                    <span> {tag} </span>
-                {/each}
-            </span>
-            <time datetime={blog.publishDate.toISOString().split("T")[0]}>
-                {blog.publishDate.toLocaleString("en-GB", {dateStyle: "medium"})}
-            </time>
-            <span class="seperator">|</span>
-            <span class={"dificulty " + blog.dificulty.toLowerCase()}>{blog.dificulty}</span>
-        </footer>
-    </div>
+    <a href={`/blog/${name}`} title={`Read ${blog.title}`}>
+        {#if blog.img !== undefined}
+            <img src={blog.img.path} alt={blog.img.alt} />
+        {:else}
+            <p>Show default blog background image here `^`</p>
+        {/if}
+        <div class="fade-content">
+            <h2 class="title">{blog.title}</h2>
+            <p class="description">
+                {blog.description}
+            </p>
+            <footer>
+                <span class="tags">
+                    {#each blog.tags as tag}
+                        <span> {tag} </span>
+                    {/each}
+                </span>
+                <time datetime={blog.publishDate.toISOString().split("T")[0]}>
+                    {blog.publishDate.toLocaleString("en-GB", {dateStyle: "medium"})}
+                </time>
+                <span class="seperator">|</span>
+                <span class={"dificulty " + blog.dificulty.toLowerCase()}>{blog.dificulty}</span>
+            </footer>
+        </div>
+    </a>
 </article>
 
 <style lang="scss">
@@ -50,61 +51,78 @@ export let name: CollectionEntry<"blog">["slug"]
 
     border-radius: 10px;
     box-shadow: 3px 5px 5px 2px #0002;
+    font-size: 1rem;
 
+    @media (min-width: 980px) and (max-width: 1209px) {
+        width: 420px;
+        height: 300px;
+    }
 
-    > img {
+    @media (min-width: 540px) and (max-width: 839px) {
+        width: 420px;
+        height: 300px;
+    }
+
+    @media (max-width: 370px) {
+        width: 315px;
+        min-width: 315px;
+        height: 225px;
+        font-size: 0.95rem;
+    }
+
+    a > img {
         width: 100%;
         height: 100%;
         object-fit: cover;
         transition: filter 0.3s;
     }
     
-    > a {
-        position: absolute;
-        left: 0;
-        top: 0;
-        z-index: 3;
+    /* > a { */
+    /*     position: absolute; */
+    /*     left: 0; */
+    /*     top: 0; */
+    /*     z-index: 3; */
+    /**/
+    /*     height: 100%; */
+    /*     width: 100%; */
+    /**/
+    /*     color: var(--hero-high-contrast); */
+    /*     font-family: var(--heading-font); */
+    /*     font-size: 3rem; */
+    /*     text-decoration: none; */
+    /*     text-align: center; */
+    /*     align-content: center; */
+    /**/
+    /*     opacity: 0; */
+    /*     transition: opacity 0.3s, backdrop-filter 0.3s; */
+    /* } */
 
-        height: 100%;
-        width: 100%;
+    /* &:hover { */
+    /*     > .fade-content { */
+    /*         opacity: 0; */
+    /*     } */
+    /**/
+    /*     >a { */
+    /*         opacity: 1; */
+    /*         backdrop-filter: brightness(0.7); */
+    /*     } */
+    /* } */
 
-        color: var(--hero-high-contrast);
-        font-family: var(--heading-font);
-        font-size: 3rem;
-        text-decoration: none;
-        text-align: center;
-        align-content: center;
-
-        opacity: 0;
-        transition: opacity 0.3s, backdrop-filter 0.3s;
-    }
-
-    &:hover {
-        > .fade-content {
-            opacity: 0;
-        }
-
-        >a {
-            opacity: 1;
-            backdrop-filter: brightness(0.7);
-        }
-    }
-
-    > .fade-content {
+    > a > .fade-content {
         position: absolute;
         bottom: 0;
         left: 0;
 
         width: 100%;
         height: fit-content;
-        padding: 10px 10px;
+        padding: 10px 10px 0 10px;
 
         background-image: linear-gradient(to bottom, #0000, #0008 40px, #000a);
         transition: opacity 0.3s;
 
         > .title {
             font-family: var(--heading-font);
-            font-size: 1.2rem;
+            font-size: 1.2em;
             color: var(--hero-high-contrast);
             width: fit-content;
 
@@ -112,7 +130,7 @@ export let name: CollectionEntry<"blog">["slug"]
         }
 
         > .description {
-            font-size: 0.9rem;
+            font-size: 0.9em;
             color: var(--hero-medium-contrast);
             width: fit-content;
 
@@ -129,7 +147,7 @@ export let name: CollectionEntry<"blog">["slug"]
             height: fit-content;
             margin: 0 0 5px 0;
 
-            font-size: 0.8rem;
+            font-size: 0.8em;
             
             > * {
                 padding-bottom: 5px;

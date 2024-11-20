@@ -26,6 +26,7 @@ article {
     position: fixed;
     bottom: 20px;
     right: 20px;
+    z-index: 10;
 
     width: calc(2.5rem + 16px);
     height: calc(2.5rem + 16px);
@@ -119,11 +120,13 @@ article {
     }
 
     &:has(input[type=checkbox]:checked) {
-        background-color: #ddd;
         width: 300px;
         height: 400px;
+
         overflow: scroll;
+        background-color: #ddd;
         border-radius: 11px;
+        box-shadow: 2px 3px 5px 2px #0004;
     }
 
 }

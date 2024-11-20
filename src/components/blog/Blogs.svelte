@@ -10,6 +10,7 @@ import Neovim from "../svgs/Neovim.svelte"
 
 export let blogs: CollectionEntry<"blog">[];
 
+
 let thisBlogsContainer: HTMLDivElement;
 let hash: string = "";
 let blogsScroll = 0;
@@ -120,11 +121,40 @@ function handleHashChange({newURL}: HashChangeEvent | {newURL: string}) {
         column-gap: 20px;
         height: 100vh;
 
+        @media (max-width: 469px) {
+            grid-template:
+                "header" min-content
+                "blogs " 1fr
+                / 1fr;
+        }
+
         nav {
             grid-area: sidebar;
             margin: 0;
-            background-color: #0002;
+            background-color: #ddd;
             padding-top: 50px;
+
+            @media (max-width: 469px) {
+                position: absolute;
+                bottom: 20px;
+                left: 0;
+                right: 0;
+                z-index: 2;
+
+                display: flex;
+                column-gap: var(--gap);
+
+                padding: 10px var(--gap);
+                margin-inline: var(--gap);
+
+                border: 1px solid #fffc;
+                box-shadow: 2px 3px 5px 2px #0004;
+                border-radius: 20px;
+                background-color: #fff8;
+                backdrop-filter: blur(20px) saturate(1.5);
+
+                --gap: calc(20px + (10vw - 47px));
+            }
 
             a {
                 display: block;
@@ -140,6 +170,12 @@ function handleHashChange({newURL}: HashChangeEvent | {newURL: string}) {
 
                 box-shadow: 2px 3px 5px 2px #0004;
                 border-radius: 100%;
+
+                @media (max-width: 469px) {
+                    margin-bottom: 0;
+                    width: 100%;
+                    background-color: #fff5;
+                }
             }
         }
 
@@ -148,20 +184,42 @@ function handleHashChange({newURL}: HashChangeEvent | {newURL: string}) {
             font-family: var(--heading-font);
             color: var(--high-contrast);
             margin-block: 30px;
+
+            @media (max-width: 469px) {
+                text-align: center;
+            }
         }
 
         #blogs-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            grid-auto-rows: 250px;
-            row-gap: 20px;
-            overflow: scroll;
+            grid-template-columns: repeat(auto-fit, 350px);
+            grid-auto-rows: max-content;
+            gap: 20px;
+            justify-content: space-evenly;
 
             height: 100%;
             padding-bottom: 50px;
+            padding-right: 20px;
+            overflow: hidden;
 
             &::-webkit-scrollbar {
                 display: none;
+            }
+
+            @media (min-width: 980px) and (max-width: 1209px) {
+                grid-template-columns: repeat(auto-fit, 420px);
+            }
+
+            @media (min-width: 540px) and (max-width: 839px) {
+                grid-template-columns: repeat(auto-fit, 420px);
+            }
+
+            @media (max-width: 370px) {
+                grid-template-columns: 315px;
+            }
+
+            @media (max-width: 469px) {
+                padding-right: 0;
             }
         }
     }
