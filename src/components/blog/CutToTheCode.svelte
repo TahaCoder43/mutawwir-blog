@@ -46,14 +46,15 @@ onMount(() => {
 <style lang="scss">
     a#to-code {
         display: inline-block;
-        position: fixed;
-        bottom: 80px;
-        left: 0;
-        right: 0;
+        position: relative;
+        /* position: absolute; */
+        /* left: 50px; */
+        /* bottom: 50px; */
 
         width: fit-content;
         padding-block: 10px;
         padding-inline: 10px;
+        margin-top: 20px;
         margin-inline: auto;
 
         background-image: url("/blog/linear-gradient.png");
@@ -71,6 +72,11 @@ onMount(() => {
         user-select: none;
         transition: color 0.3s, transform 0.2s, opacity 0.3s, visibility 0s;
         animation: gradient-move 15s infinite linear forwards;
+
+        @media (max-width: 480px) {
+            font-size: 1.5rem;
+            padding-block: 7px;
+        }
 
         &::before {
             content: "";

@@ -91,6 +91,16 @@ const { title, description } = Astro.props;
     @font-face {
         font-family: "Poppins";
         src:
+            url("/fonts/Poppins-ExtraBold.woff2") format("woff2"),
+            url("/fonts/Poppins-ExtraBold.woff") format("woff");
+        font-weight: 800;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: "Poppins";
+        src:
             url("/fonts/Poppins-Black.woff2") format("woff2"),
             url("/fonts/Poppins-Black.woff") format("woff");
         font-weight: 900;

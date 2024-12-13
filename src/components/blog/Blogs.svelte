@@ -29,6 +29,12 @@ function onThisBlogsContainerChange(thisBlogsContainer: HTMLDivElement | undefin
     handleScroll()
 }
 
+function blogHasContent(blog: CollectionEntry<"blog">) {
+    const hasIntroductoryHeading = /^\n*(\nimport[^\n]*from[^\n]*)*\n*##/.test(blog.body)
+    return hasIntroductoryHeading
+
+}
+
 function handleScroll() {
     const scrollTop = document.documentElement.scrollTop
 
@@ -91,11 +97,15 @@ function handleHashChange({newURL}: HashChangeEvent | {newURL: string}) {
         <div id="blogs-container" bind:this={thisBlogsContainer} >
             {#if hash === ""}
                 {#each blogs as blog}
-                    <BlogCard blog={blog.data} name={blog.slug} />
+                    {@debug blog}
+                    {#if blogHasContent(blog)}
+                        <BlogCard blog={blog.data} name={blog.slug} />
+                    {/if}
                 {/each}
             {:else}
                 {#each blogs as blog}
-                    {#if blog.data.tags[0].toLowerCase() === hash}
+                    {#if blog.data.tags[0].toLowerCase() === hash && blogHasContent(blog)}
+                        {@debug blog}
                         <BlogCard blog={blog.data} name={blog.slug} />
                     {/if}
                 {/each}

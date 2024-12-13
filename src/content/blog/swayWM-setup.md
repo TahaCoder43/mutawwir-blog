@@ -8,3 +8,5 @@ img:
     path: /blog/banners/Sway_Wallpaper_Blue_1136x640.png
     alt: Official Default SwayWM background
 ---
+
+## Introduction

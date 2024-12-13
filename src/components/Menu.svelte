@@ -48,7 +48,7 @@ input#open-sidebar {
 
             ~ section#menu {
                 top: 0;
-                transition: top 0.3s;
+                box-shadow: 0 5px 10px 2px #0004;
             }
         }
     }
@@ -86,7 +86,7 @@ section#menu {
     padding: 20px 0 0 20px;
 
     background-image: linear-gradient(to bottom right, hsl(270, 50%, 90%), hsl(270, 100%, 80%));
-    transition: top 0.4s;
+    transition: top 0.3s, box-shadow 0.3s;
 
     /* > a { */
     /*     grid-area: logo; */

@@ -120,7 +120,7 @@ article {
     }
 
     &:has(input[type=checkbox]:checked) {
-        width: 300px;
+        width: min(80%, 300px);
         height: 400px;
 
         overflow: scroll;

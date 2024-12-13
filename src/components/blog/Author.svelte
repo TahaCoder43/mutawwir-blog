@@ -24,7 +24,9 @@ section {
 
     height: 250px;
     max-width: var(--max-width);
-    margin: 50px auto 0 auto;
+    width: 90%;
+    margin-inline: var(--margin-inline);
+    margin-block: 50px 0;
     padding: 10px 20px;
 
     background-image: linear-gradient(to bottom right, hsl(280, 100%, 80%) 50%, hsl(250, 100%, 80%));

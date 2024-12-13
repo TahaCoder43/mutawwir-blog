@@ -8,10 +8,21 @@
     let scrolledPerc= 0;
     $: scrolledPercVar = `--scrolled-perc: ${scrolledPerc};`
     let scrollEffectLimit = 200;
+    let thisNav: HTMLElement;
+    $: console.log(thisNav)
 
     function hideAndShow(priorScrollTop: number, scrollTop: number) {
         let scrolledDown = scrollTop > priorScrollTop
         let scrolledUp = scrollTop < priorScrollTop
+
+        if (thisNav !== null) {
+            if (thisNav.querySelector(":scope > input#open-sidebar:checked")) {
+                console.log("comes here")
+                return
+            }
+        }
+
+        console.log("and heree")
 
         if (scrolledDown) {
             visibility = "hidden"
@@ -49,7 +60,7 @@
 
 </script>
 
-<nav class={visibility} style={scrolledPercVar}>
+<nav class={visibility} style={scrolledPercVar} bind:this={thisNav}>
     <a href="/">
         <img src="/logo.png" alt="Logo for mutwawwir blog" id=logo />
     </a>

@@ -10,6 +10,7 @@ img:
 practicalSectionId: installation
 ---
 
+
 ## Introduction
 
 As a runner of a potato (very slow) laptop, the KDE NEON operating system with the KDE Plasma desktop environment just was not cutting it.
