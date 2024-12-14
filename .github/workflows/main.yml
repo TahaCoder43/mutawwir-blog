@@ -1,0 +1,27 @@
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy to github pages
+    runs-on: ubuntu-latest
+    steps:
+        - uses: actions/checkout@v4
+        - uses: actions/setup-node@v4
+          with: 
+            node-version: '21.x'
+        - run: sudo apt-get install sshpass
+        - run: npm ci
+        - run: npm run build 
+        - run: cd dist
+        - run: mkdir remote_dist && cd remote_dist
+        - run: git pull git@github.com:mutawwir-blog/mu
+        - run: git init .
+        - run: git add .
+        - run: git commit -m "local update"
+        - run: git remote add origin git@github.com:mutawwir-blog/mutawwir-blog.github.io
+        - run: sshpass -p $SSH_PASSWORD git 
+      
+    
