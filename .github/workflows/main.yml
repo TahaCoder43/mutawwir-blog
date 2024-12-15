@@ -17,11 +17,12 @@ jobs:
         - run: npm run build 
         - run: cd dist
         - run: mkdir remote_dist && cd remote_dist
-        - run: git pull git@github.com:mutawwir-blog/mu
-        - run: git init .
+        - run: sshpass -p $SSH_PASSWORD git clone git@github.com:mutawwir-blog/mutawwir-blog.github.io
+        - run: rm -rf ./*
+        - name: Copy contents of parent dist into child remote dist, without copying in child dist too
+          run: find ../ -maxdepth 1 -printf "%f\n" | grep -v -E "(^remote_dist$|^\.\./$)" | while read sibling; do cp ../$sibling ./; done
         - run: git add .
         - run: git commit -m "local update"
-        - run: git remote add origin git@github.com:mutawwir-blog/mutawwir-blog.github.io
-        - run: sshpass -p $SSH_PASSWORD git 
+        - run: sshpass -p $SSH_PASSWORD git push
       
     
