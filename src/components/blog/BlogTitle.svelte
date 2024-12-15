@@ -3,10 +3,9 @@
 import { onMount } from "svelte";
 import CutToTheCode from "./CutToTheCode.svelte";
 
-export let backgroundScrollEffectLimit: number, isLongTitle: boolean, isMediumTitle: boolean, practicalSectionId: string;
+export let backgroundScrollEffectLimit: number, isLongTitle: boolean, isMediumTitle: boolean, practicalSectionId: string | undefined;
 let backgroundScrollEffectLimitVar = `--background-scroll-effect-limit: ${backgroundScrollEffectLimit}px;`;
 
-const hasPracticalSectionId = practicalSectionId !== undefined;
 let scrolled = false
 $: opacity = scrolled ? 0 : 1
 $: opacityVar = `--opacity: ${opacity};`
@@ -34,7 +33,7 @@ onMount(() => {
     </h1>
     <!-- {hasPracticalSectionId && <CutToTheCode {practicalSectionId} client:load />} -->
 
-    {#if hasPracticalSectionId}
+    {#if practicalSectionId !== undefined}
         <CutToTheCode {practicalSectionId} />
     {/if}
 </div>
