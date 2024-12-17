@@ -22,22 +22,22 @@
     <section class="hidden">
         <img src="/link-professions/programmer-cat.jpg" alt="Purrgrammer: Cat on chair with triple monitor setup"/>
         <h2>Work</h2>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, debitis enim explicabo saepe officiis dolorum!</p>
-        <BouncyButton title="Goto my portfolio">Order</BouncyButton>
+        <p>I am open to freelancing, you can contact me for work at my linkedin, email or phone number.</p>
+        <BouncyButton title="Goto my linkedin" href="https://www.linkedin.com/in/taha-ibn-munawar-4b4252257/">Linkedin</BouncyButton>
     </section>
     <div id=seperator />
     <section class="hidden">
         <video src="/link-professions/neuralnexus-homepage.mp4" autoplay muted loop />
         <h2>Institute</h2>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, debitis enim explicabo saepe officiis dolorum!</p>
-        <BouncyButton title="Goto my institute">Learn</BouncyButton>
+        <p>I teach O-level's math, computer and physics with the addition of programming. I will teach online and in-person InshaAllah.</p>
+        <BouncyButton title="Goto my institute" href="https://neural-nexus-institute.github.io">Learn</BouncyButton>
     </section>
     <div id=seperator />
     <section class="hidden">
         <img src="/link-professions/glassmorphic-github-logo.png" alt="Glassmorphic, Acryic, Translucent logo design of github logo"/>
         <h2>Github</h2>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, debitis enim explicabo saepe officiis dolorum!</p>
-        <BouncyButton title="Goto my github">Check</BouncyButton>
+        <p>Check my other projects at my github!</p>
+        <BouncyButton title="Goto my github" href="https://github.com/tahacoder43">Check</BouncyButton>
     </section>
 </section>
 

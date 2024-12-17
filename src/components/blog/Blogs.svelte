@@ -36,7 +36,6 @@ function onThisBlogsContainerChange(thisBlogsContainer: HTMLDivElement | undefin
 function blogHasContent(blog: CollectionEntry<"blog">) {
     const hasIntroductoryHeading = /^\n*(\nimport[^\n]*from[^\n]*)*\n*##/.test(blog.body)
     return hasIntroductoryHeading
-
 }
 
 function setScriptedGap(thisBlogsContainer: HTMLDivElement) {

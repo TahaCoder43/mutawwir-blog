@@ -8,8 +8,14 @@ interface Props {
 }
 
 export async function getStaticPaths() {
+
+    function ignoreEmptyBlogs(blog: CollectionEntry<"blog">) {
+        const hasIntroductoryHeading = /^\n*(\nimport[^\n]*from[^\n]*)*\n*##/.test(blog.body)
+        return hasIntroductoryHeading
+    }
+
     const blogs = await getCollection("blog");
-    return blogs.map((blog) => {
+    return blogs.filter(ignoreEmptyBlogs).map((blog) => {
         return {
             params: { title: blog.slug },
             props: {
