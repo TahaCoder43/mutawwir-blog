@@ -14,8 +14,11 @@ export let blogs: CollectionEntry<"blog">[];
 let thisBlogsContainer: HTMLDivElement;
 let hash: string = "";
 let blogsScroll = 0;
+let scriptedGap = 20;
+
 $: onThisBlogsContainerChange(thisBlogsContainer)
 $: blogsScrollVar = `--blogs-scroll: ${blogsScroll}px;`
+$: scriptedGapVar = `--scripted-gap: ${scriptedGap}px;`
 
 const startScroll = 4.5 * 16
 
@@ -26,7 +29,8 @@ function onThisBlogsContainerChange(thisBlogsContainer: HTMLDivElement | undefin
     }
     blogsScroll = thisBlogsContainer.scrollHeight - thisBlogsContainer.clientHeight
     handleHashChange({newURL: location.href})
-    handleScroll()
+    handleDocumentScroll()
+    setScriptedGap(thisBlogsContainer)
 }
 
 function blogHasContent(blog: CollectionEntry<"blog">) {
@@ -35,7 +39,28 @@ function blogHasContent(blog: CollectionEntry<"blog">) {
 
 }
 
-function handleScroll() {
+function setScriptedGap(thisBlogsContainer: HTMLDivElement) {
+    if (window.innerWidth < 470) {
+        return
+    }
+    const containerWidth = thisBlogsContainer.clientWidth;
+    const blogCardWidth = thisBlogsContainer.children[0].clientWidth;
+    const minimumGap = 20
+    const containerRowBlogCount = Math.floor(containerWidth / (blogCardWidth + minimumGap))
+    const extraSpace = (containerWidth % (blogCardWidth + minimumGap))
+    const extraGap = extraSpace / containerRowBlogCount
+    scriptedGap = minimumGap + extraGap
+    console.log("runs")
+    console.log("containerRowBlogCount", containerRowBlogCount)
+    
+
+}
+
+function handleWindowResize() {
+    setScriptedGap(thisBlogsContainer)
+}
+
+function handleDocumentScroll() {
     const scrollTop = document.documentElement.scrollTop
 
     console.log(scrollTop, startScroll)
@@ -71,8 +96,8 @@ function handleHashChange({newURL}: HashChangeEvent | {newURL: string}) {
 
 </script>
 
-<svelte:document on:scroll={handleScroll} />
-<svelte:window on:hashchange={handleHashChange} />
+<svelte:document on:scroll={handleDocumentScroll} />
+<svelte:window on:hashchange={handleHashChange} on:resize={handleWindowResize} />
 
 <div id="blogs-stick-limit" style={blogsScrollVar}>
     <article>
@@ -94,7 +119,7 @@ function handleHashChange({newURL}: HashChangeEvent | {newURL: string}) {
             </a>
         </nav>
         <h1>Fresh Blogs</h1>
-        <div id="blogs-container" bind:this={thisBlogsContainer} >
+        <div id="blogs-container" bind:this={thisBlogsContainer} style={scriptedGapVar}>
             {#if hash === ""}
                 {#each blogs as blog}
                     {@debug blog}
@@ -204,13 +229,14 @@ function handleHashChange({newURL}: HashChangeEvent | {newURL: string}) {
             display: grid;
             grid-template-columns: repeat(auto-fit, 350px);
             grid-auto-rows: max-content;
-            gap: 20px;
-            justify-content: space-evenly;
+            gap: 20px var(--scripted-gap);
+            justify-content: flex-start;
 
             height: 100%;
             padding-bottom: 50px;
-            padding-right: 20px;
+            padding-right: var(--scripted-gap);
             overflow: hidden;
+            --scripted-gap: 20px;
 
             &::-webkit-scrollbar {
                 display: none;
@@ -229,7 +255,9 @@ function handleHashChange({newURL}: HashChangeEvent | {newURL: string}) {
             }
 
             @media (max-width: 469px) {
+                justify-self: center;
                 padding-right: 0;
+                gap: 20px;
             }
         }
     }

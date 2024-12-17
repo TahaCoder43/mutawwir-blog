@@ -24,7 +24,7 @@ Error relocating /usr/bin/application/libfoo.so.1: foosymbol: symbol not found
 
 Well that is because applications compiled in Glib-C can't be ran on Musl-C. So what's the solution? Many!
 
-- Recompile the application in Musl-C [(Read this article)](https://example.com)
+- Recompile the application in Musl-C 
 - Somehow get Glib-C support in Musl-C
 
 In this article we we'll look at Getting Glib-C support. <Reason client:load/> for Glib-C support over Recompiling. First of all you should try this simple solution `sudo apk add gcompat`. This may just solve your problem, if not then there are multiple other ways to run Glib-C application.
@@ -36,7 +36,7 @@ In this article we we'll look at Getting Glib-C support. <Reason client:load/> f
 - Fake Mounts
 - Chroot that has Glib-C
 
-Each of these solutions will eat a few GBs. Yikes! {/* Add which solution is the lightest over here */}. In this article we will look at the last solution
+Each of these solutions will eat a few GBs. Yikes! In this article we will look at the last solution
 
 ## Glib-C Chroot
 
@@ -91,14 +91,4 @@ Now you can install a package `yay -S package_name`
 
 > [!CAUTION]
 > Any user can upload any package on AUR, theoretically one could upload malware, disguised as a software, see this [forum post](https://forum.manjaro.org/t/how-safe-is-aur-and-pacman-in-general/57259/6) and [reddit post](https://www.reddit.com/r/archlinux/comments/3yiq4s/is_the_aur_safe_to_use/)
-
-{/* ```mermaid
-graph TD;
-    A--\>B;
-    A--\>C;
-    B--\>C;
-    C--\>D;
-``` */}
-
-
 

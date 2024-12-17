@@ -9,4 +9,3 @@ img:
     alt: Snowcaps Mountains with milkyway glaxy visible on the sky
 ---
 
-## You can do a lot with Nix

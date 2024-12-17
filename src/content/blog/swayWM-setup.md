@@ -9,4 +9,3 @@ img:
     alt: Official Default SwayWM background
 ---
 
-## Introduction
