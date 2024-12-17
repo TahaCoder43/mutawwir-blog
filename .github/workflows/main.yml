@@ -12,17 +12,40 @@ jobs:
         - uses: actions/setup-node@v4
           with: 
             node-version: '21.x'
+            cache: "npm"
         - run: sudo apt-get install sshpass
+        - uses: webfactory/ssh-agent@v0.9.0
+          with: 
+            ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+        - uses: actions/cache@v3
+          env: 
+            cache-name: cache-node-modules
+          with: 
+            path: ~/.npm
+            key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+            restore-keys: |
+              ${{ runner.os }}-node-
         - run: npm ci
         - run: npm run build 
-        - run: cd dist
-        - run: mkdir remote_dist && cd remote_dist
-        - run: sshpass -p $SSH_PASSWORD git clone git@github.com:mutawwir-blog/mutawwir-blog.github.io
-        - run: rm -rf ./*
-        - name: Copy contents of parent dist into child remote dist, without copying in child dist too
-          run: find ../ -maxdepth 1 -printf "%f\n" | grep -v -E "(^remote_dist$|^\.\./$)" | while read sibling; do cp ../$sibling ./; done
-        - run: git add .
-        - run: git commit -m "local update"
-        - run: sshpass -p $SSH_PASSWORD git push
+        - env: 
+            SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
+          run: |
+            mkdir /tmp/remote_dist
+            cd /tmp/remote_dist
+            git config --global user.name 'Taha ibn Munawar'
+            git config --global user.email 'taha-ibn-munawar@proton.me'
+            sshpass -v -P "Enter passphrase for key" -p $SSH_PASSWORD git clone git@github.com:mutawwir-blog/mutawwir-blog.github.io ./
+            ls -A | awk '!/^\.git.*$/ { print $0 }' | while read line; do rm -rf ./$line; done
+
+            # Copying contents of parent into child, without copying the child itself too
+            cp -r ~/work/mutawwir-blog/mutawwir-blog/dist/* ./
+            touch .nojekyll
+            if [[ -n $(git status -s) ]]; then
+              git add .
+              git commit -m "updated from github action workflow"
+              sshpass -v -P "Enter passphrase for key" -p $SSH_PASSWORD git push
+            else
+              echo nothing to be commited, exiting
+            fi
       
     
