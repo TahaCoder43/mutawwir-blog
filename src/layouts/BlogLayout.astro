@@ -21,6 +21,7 @@ const { headings } = await blog.render();
 const backgroundScrollEffectLimit = 300;
 
 const hasReasons = reasons !== undefined;
+const hasImage = img !== undefined;
 const hasAlterH1Title = alterH1Title !== undefined;
 const isMediumTitle = title.length >= 30;
 const isLongTitle = title.length >= 45;
@@ -29,7 +30,7 @@ const isLongTitle = title.length >= 45;
 <Layout {title} {description}>
     <Fragment slot="meta:og">
         <meta property="og:type" content="article" />
-        <meta property="og:image" content={img.path} />
+        {hasImage && <meta property="og:image" content={img.path} />}
     </Fragment>
     <article itemscope itemtype="https://schema.org/BlogPosting">
         <BlogBackground {img} scrollEffectLimit={backgroundScrollEffectLimit} client:load />
