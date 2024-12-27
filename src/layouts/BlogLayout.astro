@@ -67,7 +67,7 @@ const isLongTitle = title.length >= 45;
         font-size: 1rem;
         --max-width: 800px;
         --paragraph-size: 1.3em;
-        --heading-size: 3em;
+        --heading-size: 2.8em;
 
         @media (max-width: 450px) {
             font-size: 0.85rem;
@@ -96,7 +96,7 @@ const isLongTitle = title.length >= 45;
             font-family: Poppins, sans-serif;
             font-size: var(--heading-size);
             font-weight: 700;
-            margin: 0 10px 0 0;
+            margin: 0 0 0 0;
         }
 
         > time {
@@ -139,18 +139,36 @@ const isLongTitle = title.length >= 45;
             }
         }
 
-        > h2 {
-            color: var(--high-contrast);
-            font-family: Poppins, sans-serif;
-            font-size: var(--heading-size);
+        h2,
+        h3 {
             font-weight: 700;
-            margin-bottom: 10px;
         }
 
-        > p,
-        > div.markdown-alert > p:not(.markdown-alert-title),
-        > ul > li,
-        > ol > li {
+        h2 {
+            font-size: var(--heading-size);
+            margin: 10px 0 15px 0;
+            color: var(--high-contrast);
+            font-family: Poppins, sans-serif;
+        }
+
+        h3 {
+            font-size: calc(var(--heading-size) * 0.75);
+            margin: 0 0 8px 0;
+            color: var(--medium-contrast);
+            font-family:
+                Space Grotesk,
+                sans-serif;
+        }
+
+        ol,
+        ul {
+            margin-block: 5px;
+        }
+
+        p,
+        div.markdown-alert > p:not(.markdown-alert-title),
+        ul > li,
+        ol > li {
             color: var(--medium-contrast);
             > code {
                 background-color: hsl(270, 100%, 85%);
@@ -160,11 +178,30 @@ const isLongTitle = title.length >= 45;
             }
         }
 
-        > pre {
+        pre {
             padding: 10px;
             border-radius: 5px;
             font-size: 0.9rem;
             box-shadow: 2px 3px 8px 2px #0008;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            transition:
+                filter 0.3s,
+                background-color 0.3s;
+
+            &:hover {
+                filter: brightness(0.8);
+                background-color: rgb(0, 0, 0, 0.2); // for transparent images, as filter does not effect them
+            }
+        }
+
+        img + em {
+            display: block;
+            text-align: center;
         }
 
         div.markdown-alert {

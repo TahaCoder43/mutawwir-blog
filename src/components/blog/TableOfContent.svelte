@@ -4,12 +4,18 @@ import type { MarkdownHeading } from "astro";
 
 export let headings: MarkdownHeading[];
 
+console.log("headings", headings)
+
 </script>
 
 <article>
     <nav>
         {#each headings as heading}
-            <a href={"#" + heading.slug}> {heading.text} </a>
+            {#if heading.depth <= 2}
+                <a class={"top-level"} href={"#" + heading.slug}> {heading.text} </a>
+            {:else}
+                <a class={"nested"} style={`--nested-level: ${heading.depth};`} href={"#" + heading.slug}> {heading.text} </a>
+            {/if}
         {/each}
     </nav>
     <input type=checkbox id="toggle-table-of-content"/>
@@ -44,12 +50,12 @@ article {
         transition: none;
         counter-reset: links;
 
-        a {
+        a.top-level {
             position: relative;
             counter-increment: links;
             display: block;
 
-            margin: 0 0 10px var(--list-marker-size);
+            margin: 10px 0 0 var(--list-marker-size);
 
             color: var(--high-contrast);
             font-size: 1.5rem;
@@ -75,6 +81,21 @@ article {
 
                 background-color: hsl(270, 80%, 70%);
             }
+        }
+
+        a.nested {
+            display:block;
+
+            color: var(--medium-contrast);
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin-left: calc(var(--nested-level) * 15px);
+
+        }
+
+        a::before {
+            content: "- ";
+            text-decoration: none;
         }
     }
 
