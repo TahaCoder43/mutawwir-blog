@@ -10,6 +10,10 @@ const blogs = await getCollection("blog");
     title="Blogs"
     description="Read blogs on various tech topics such as Coding, Linux, Dev-tools, IDE's & Code-editors, Graphic Design, Code Infrastructure and more!"
 >
+    <Fragment slot="meta:og">
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="/logo.png" />
+    </Fragment>
     <Blogs {blogs} client:load />
 </Layout>
 

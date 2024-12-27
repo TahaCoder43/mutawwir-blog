@@ -27,6 +27,10 @@ const isLongTitle = title.length >= 45;
 ---
 
 <Layout {title} {description}>
+    <Fragment slot="meta:og">
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content={img.path} />
+    </Fragment>
     <article itemscope itemtype="https://schema.org/BlogPosting">
         <BlogBackground {img} scrollEffectLimit={backgroundScrollEffectLimit} client:load />
         <header>

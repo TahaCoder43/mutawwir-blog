@@ -21,6 +21,10 @@ const blogsInfoStickLimit = 1500;
     title="The Mutawwir blog"
     description="Cut to the Code, No-Nonsense Tech Blogs about Coding, Linux, Dev-tools, IDEs, Infrastructure and more"
 >
+    <Fragment slot="meta:og">
+        <meta property="og:type" content="website" />
+        <meta property="og:video" content="/videos/hero-background.mp4" />
+    </Fragment>
     <Hero />
     <!-- <InPageNavbar {blogsInfoStickLimit} bgVideoStickLimit={bgVideoLimits.stick} client:load /> -->
     <div id="sticky-limit-video-background">
