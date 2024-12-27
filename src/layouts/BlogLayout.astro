@@ -31,6 +31,8 @@ const isLongTitle = title.length >= 45;
     <Fragment slot="meta:og">
         <meta property="og:type" content="article" />
         {hasImage && <meta property="og:image" content={img.path} />}
+        {hasImage && <meta name="twitter:image" content={img.path} />}
+        <meta name="twitter:card" content="summary_large_image" />
     </Fragment>
     <article itemscope itemtype="https://schema.org/BlogPosting">
         <BlogBackground {img} scrollEffectLimit={backgroundScrollEffectLimit} client:load />
