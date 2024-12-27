@@ -13,6 +13,8 @@ const blogs = await getCollection("blog");
     <Fragment slot="meta:og">
         <meta property="og:type" content="website" />
         <meta property="og:image" content="/logo.png" />
+        <meta name="twitter:image" content="/logo.png" />
+        <meta name="twitter:card" content="summary_large_image" />
     </Fragment>
     <Blogs {blogs} client:load />
 </Layout>
